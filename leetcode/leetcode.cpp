@@ -4245,10 +4245,43 @@ public:
 
 };
 
+class Solution_29 { //此题保证一定除尽的条件
+public:
+	int divide(int dividend, int divisor) {
+
+		if (divisor == 0 || (dividend == INT_MIN&&divisor == -1)) //考虑越界的问题
+		{
+			return INT_MAX;
+		}
+		int ret = 0;
+		bool sign = (dividend > 0) ^ (divisor > 0); //异号为1
+
+		//long long dividend_ = labs(dividend); //转换 abs(-2147483648)=-2147483648 ;换成labs在leetcode AC过但是VS2013编译器还是负数
+		//long long divisor_ = labs(divisor);  //区别lab，abs,fabs()
+
+		//long long dividend_ = llabs(long long(dividend)); //转换 abs(-2147483648)=-2147483648 //强制类型转换一个long和int 一样的，必须有两个long long
+
+		long long dividend_ = llabs((dividend)); //用llabs()即可
+		long long divisor_ = llabs(divisor);  //区别lab，abs,fabs()
+		while (dividend_ >= divisor_)
+		{
+			int temp = divisor_;
+			int multi = 1;//被除数的次数
+			while (dividend_ >= (temp << 1)) //成倍的增加，时间更快
+			{
+				temp = temp << 1;
+				multi = multi << 1;
+			}
+			dividend_ -= temp;
+			ret += multi;
+		}
+
+		return sign ? -ret : ret;
+	}
+};
 
 
-
-
+   
 
 
 #define cin infile
@@ -4296,7 +4329,7 @@ int main()
 	Solution_120* s_120 = new Solution_120();
 	cout << s_120->minimumTotal(triangle) << endl;
 	return 0;
-
+	
 	//c文件输入
 	freopen("in.txt", "r", stdin);
     int ans = 0;
