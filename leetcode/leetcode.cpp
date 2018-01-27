@@ -4245,6 +4245,7 @@ public:
 
 };
 
+// 29. Divide Two Integers
 class Solution_29 { //此题保证一定除尽的条件
 public:
 	int divide(int dividend, int divisor) {
@@ -4280,8 +4281,85 @@ public:
 	}
 };
 
+// 30. Substring with Concatenation of All Words
+class Solution_30 {
+public:
+	vector<int> findSubstring(string s, vector<string>& words) {
+		vector<int> vec;
+		int words_num = words.size();
+		int words_len = words[0].size();
 
+		if (s.size()==0||words.size()==0||s.size()<words_num*words_len)
+		{
+			return vec;
+		}
+
+		unordered_map<string, int> mp;
+		for (string str:words)
+		{
+			mp[str]++; //去掉重复元素的words
+		}
+
+		for (int i = 0; i < s.size() - words_len*words_num+1;i++)
+		{
+			unordered_map<string, int> dest;
+			int j = 0;
+			for (; j < words_num;j++) 
+			{
+				string temp = s.substr(i + j*words_len, words_len);
+				dest[temp]++;
+				if (!mp.count(temp)||(mp.count(temp)&&dest[temp]>mp[temp]))
+				{
+					break;
+				}
+			}
+			if (j==words_num)
+			{
+				vec.push_back(i);
+			}
+		}
+		return vec;
+	}
+};
    
+class Solution_46 {
+public:
+	void help(int i,vector<int> &nums,vector<vector<int>> &vecs)
+	{
+		
+		if (i==nums.size())
+		{
+			vecs.push_back(nums);
+			return;
+		}
+		else
+		{
+			for (int j = i; j < nums.size();j++)
+			{
+				swap(nums[i],nums[j]);
+				help(i + 1, nums,vecs);
+				swap(nums[i],nums[j]);
+			}
+		}
+		return;
+	}
+
+	vector<vector<int>> permute(vector<int>& nums) {
+
+		vector<vector<int>> vecs;
+
+		if (nums.size()==0)
+		{
+			return vecs;
+		}
+
+		help(0, nums,vecs);
+
+		return vecs;
+	}
+};
+
+
 
 
 #define cin infile
@@ -4289,6 +4367,9 @@ public:
 #include <iomanip>  //setprecision() setw()
 int main()
 {    
+
+	Solution_46 su_46;
+	su_46.permute(vector<int>({1,2,3}));
 
 	Solution_28 su_28;
 	su_28.strStr("banananobano", "nano");
@@ -4371,12 +4452,9 @@ int main()
 	gets(str2); //how are you?
 	puts(str2);
 
-
-
 	char ch[] = "china\0china";
 	cout << sizeof(ch) << endl;
 	cout << strlen(ch) << endl;
-
 
 	//test01
 	char*a[] = { "work", "at", "alibaba" };
