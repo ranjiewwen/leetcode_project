@@ -4321,7 +4321,8 @@ public:
 		return vec;
 	}
 };
-   
+
+// 46. Permutations 
 class Solution_46 {
 public:
 	void help(int i,vector<int> &nums,vector<vector<int>> &vecs)
@@ -4359,7 +4360,54 @@ public:
 	}
 };
 
+class Solution_47 {
+public:
 
+	bool IsSwap(vector<int>&nums,int i,int j)
+	{
+		for (; i < j; i++)
+		{
+			if (nums[i] == nums[j])
+			{
+				return false;
+			}
+		}
+		return true;
+	}
+
+	void help(int i,vector<int>&nums,vector<vector<int>> &vecs)
+	{
+		if (i==nums.size())
+		{
+			vecs.push_back(nums);
+			return;
+		}
+		for (int j = i; j < nums.size(); j++)
+		{
+			if (IsSwap(nums,i,j))
+			{
+				swap(nums[i],nums[j]);
+				help(i + 1, nums, vecs);
+				swap(nums[i],nums[j]);
+			}
+		}
+		return;
+	}
+
+	vector<vector<int>> permuteUnique(vector<int>& nums) {
+		vector<vector<int>> vecs;
+		vector<int> vec;
+
+		if (nums.size()==0)
+		{
+			return vecs;
+		}
+
+		help(0,nums,vecs);
+
+		return vecs;
+	}
+};
 
 
 #define cin infile
