@@ -4360,6 +4360,7 @@ public:
 	}
 };
 
+// Permutations ii
 class Solution_47 {
 public:
 
@@ -4409,6 +4410,16 @@ public:
 	}
 };
 
+// 31. Next Permutation
+class Solution_31 {
+public:
+	void nextPermutation(vector<int> &num) {
+
+		next_permutation(num.begin(), num.end());
+
+		return;
+	}
+};
 
 #define cin infile
 #include <fstream>
