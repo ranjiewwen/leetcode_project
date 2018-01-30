@@ -4421,11 +4421,51 @@ public:
 	}
 };
 
+class Solution_32 {
+public:
+	
+	// 只是入栈‘（’并不能解决问题，需要入栈‘（’的下标index
+	int longestValidParentheses(string s) {
+		if (s.size()<=1)
+		{
+			return 0;
+		}
+		stack<int> sta;
+		sta.push(-1); //技巧使用了初始化，否则需要记录 需要借助变量l记录当前括号匹配的子串的左侧位置
+		int ret = 0;
+		for (int i = 0; i < s.size();i++)
+		{
+			if (s[i]=='(')
+			{
+				sta.push(i);
+			}
+			else
+			{
+				sta.pop();
+				if (sta.empty())
+				{
+					sta.push(i);
+				}
+				else
+				{
+					int cur = i - sta.top();
+					ret = max(ret,cur);
+				}
+			}
+			
+		}
+		return ret;
+	}
+};
+
 #define cin infile
 #include <fstream>
 #include <iomanip>  //setprecision() setw()
 int main()
 {    
+
+	Solution_32 su_32;
+	su_32.longestValidParentheses("(())()");
 
 	Solution_46 su_46;
 	su_46.permute(vector<int>({1,2,3}));
