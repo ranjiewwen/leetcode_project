@@ -4459,9 +4459,14 @@ public:
 };
 
 // 33. Search in Rotated Sorted Array
-class Solution {
+class Solution_33 {
 public:
 	// 本质:不管什么情况，都是只是low,high进行移动，二分查找时候一定记住要有常数步的前进，防止进入死循环
+
+//input : [3, 1]
+//       	1
+//Output : -1 bug1:加等号
+//	 Expected : 1
 	int search(vector<int>& nums, int target) {
 		if (nums.size()==1&&nums[0]==target)
 		{
@@ -4477,15 +4482,15 @@ public:
 			}
 			if (nums[mid]>target)
 			{
-				if (nums[low]<nums[mid]) //低半部分有序
+				if (nums[low]<=nums[mid]) //低半部分有序;  bug 1有序部分要用等号
 				{
-					if (nums[low]>target) //target在高半部分序列中
+					if (nums[low]<=target) //target在低半部分序列中
 					{
-						low = mid + 1;
+						high = mid - 1;
 					}
 					else
 					{
-						high = mid - 1;
+						low = mid + 1;
 					}
 				}
 				else // 后半部分有序，且nums[mid]>target;必位于前半部分
@@ -4495,13 +4500,9 @@ public:
 			}
 			else
 			{
-				if (nums[low]<nums[mid]) //前部分有序，必位于后半部分
+				if (nums[mid]<=nums[high]) //后半部分有序
 				{
-					low = mid + 1;
-				}
-				else  //后半部分有序
-				{
-					if (nums[high]>target)
+					if (nums[high]>=target)
 					{
 						low = mid + 1;
 					}
@@ -4509,6 +4510,10 @@ public:
 					{
 						high = mid - 1;
 					}
+				}
+				else //nums[mid]>target 且前部分有序
+				{
+					low = mid + 1;
 				}
 			}
 			
@@ -4518,6 +4523,39 @@ public:
 
 	int search2(int A[], int n, int target) {
 
+		int low = 0, high = n - 1;
+
+		while (low<=high)
+		{
+			int mid = low + (high - low) >> 1;
+			if (A[mid]==target)
+			{
+				return mid;
+			}
+			if (A[mid]>=A[low])  //低半部分有序；先比较区间，在比较关键字target
+			{
+				if (A[mid]>target&& target>=A[low]) //bug 2: 调整那个，就不用等号
+				{
+					high = mid - 1;
+				}
+				else
+				{
+					low = mid + 1;
+				}
+			}
+			else //后半部分有序
+			{
+				if (A[mid]<target&&target<=A[high])
+				{
+					low = mid + 1;
+				}
+				else
+				{
+					high = mid - 1;
+				}
+			}
+		}
+		return -1;
 	}
 
 	int search_ref(vector<int>& nums, int target) {
@@ -4550,6 +4588,7 @@ public:
 		}
 		return -1;
 	}
+
 };
 
 
@@ -4561,6 +4600,9 @@ public:
 #include <iomanip>  //setprecision() setw()
 int main()
 {    
+	Solution_33 su_33;
+	int A_33[] = { 3,1 };
+	int ret_33=su_33.search(vector	<int>({3,1}), 1);
 
 	Solution_32 su_32;
 	su_32.longestValidParentheses("(())()");
