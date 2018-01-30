@@ -4423,7 +4423,7 @@ public:
 
 class Solution_32 {
 public:
-	
+	// 本题使用初始-1入栈，就省去了记录记录当前括号匹配的子串的左侧位置;（（））：3-(-1)=4; 但是栈为空的时候，需要入栈当前位置，例如 ())()()=6-2=4，在str[2]='）'入栈index
 	// 只是入栈‘（’并不能解决问题，需要入栈‘（’的下标index
 	int longestValidParentheses(string s) {
 		if (s.size()<=1)
@@ -4444,7 +4444,7 @@ public:
 				sta.pop();
 				if (sta.empty())
 				{
-					sta.push(i);
+					sta.push(i); //入栈
 				}
 				else
 				{
@@ -4457,6 +4457,104 @@ public:
 		return ret;
 	}
 };
+
+// 33. Search in Rotated Sorted Array
+class Solution {
+public:
+	// 本质:不管什么情况，都是只是low,high进行移动，二分查找时候一定记住要有常数步的前进，防止进入死循环
+	int search(vector<int>& nums, int target) {
+		if (nums.size()==1&&nums[0]==target)
+		{
+			return 0;
+		}
+		int low = 0, high = nums.size()-1;
+		while (low<=high)
+		{
+			int mid = low + (high - low) / 2;
+			if (nums[mid]==target)
+			{
+				return mid;
+			}
+			if (nums[mid]>target)
+			{
+				if (nums[low]<nums[mid]) //低半部分有序
+				{
+					if (nums[low]>target) //target在高半部分序列中
+					{
+						low = mid + 1;
+					}
+					else
+					{
+						high = mid - 1;
+					}
+				}
+				else // 后半部分有序，且nums[mid]>target;必位于前半部分
+				{
+					high = mid - 1;
+				}
+			}
+			else
+			{
+				if (nums[low]<nums[mid]) //前部分有序，必位于后半部分
+				{
+					low = mid + 1;
+				}
+				else  //后半部分有序
+				{
+					if (nums[high]>target)
+					{
+						low = mid + 1;
+					}
+					else
+					{
+						high = mid - 1;
+					}
+				}
+			}
+			
+		}
+		return -1;
+	}
+
+	int search2(int A[], int n, int target) {
+
+	}
+
+	int search_ref(vector<int>& nums, int target) {
+		int l = 0, r = nums.size() - 1;
+		while (l <= r) {
+			int mid = (l + r) / 2;
+			if (target == nums[mid])
+				return mid;
+			// there exists rotation; the middle element is in the left part of the array
+			if (nums[mid] > nums[r]) {
+				if (target < nums[mid] && target >= nums[l])
+					r = mid - 1;
+				else
+					l = mid + 1;
+			}
+			// there exists rotation; the middle element is in the right part of the array
+			else if (nums[mid] < nums[l]) {
+				if (target > nums[mid] && target <= nums[r])
+					l = mid + 1;
+				else
+					r = mid - 1;
+			}
+			// there is no rotation; just like normal binary search
+			else {
+				if (target < nums[mid])
+					r = mid - 1;
+				else
+					l = mid + 1;
+			}
+		}
+		return -1;
+	}
+};
+
+
+
+
 
 #define cin infile
 #include <fstream>
