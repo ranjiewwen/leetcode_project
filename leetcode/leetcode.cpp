@@ -4421,6 +4421,7 @@ public:
 	}
 };
 
+// longestValidParentheses(括号)
 class Solution_32 {
 public:
 	// 本题使用初始-1入栈，就省去了记录记录当前括号匹配的子串的左侧位置;（（））：3-(-1)=4; 但是栈为空的时候，需要入栈当前位置，例如 ())()()=6-2=4，在str[2]='）'入栈index
@@ -4591,6 +4592,7 @@ public:
 
 };
 
+// searchRange
 class Solution_34 {
 public:
 	int findUpBound(vector<int>& nums, int target) //找上边界
@@ -4687,6 +4689,36 @@ public:
 	}
 };
 
+// 35. Search Insert Position
+class Solution_35 {
+public:
+	int searchInsert1(vector<int>& nums, int target) {
+
+		int low = 0, high = nums.size() - 1;
+		while (low<=high)
+		{
+			int mid = (low + high) >> 1;
+			if (nums[mid]==target)
+			{
+				return mid;
+			}
+			else if (nums[mid]>target)
+			{
+				high = mid - 1;
+			}
+			else
+			{
+				low = mid + 1;
+			}
+		}
+		return low; //没有查找到，返回的low,即插入位置
+	}
+
+	int searchInsert(int A[], int n, int target) {
+		vector<int> vec(A, A + n);
+		return searchInsert1(vec, target);
+	}
+};
 
 
 #define cin infile
