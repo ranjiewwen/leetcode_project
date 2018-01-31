@@ -4591,7 +4591,101 @@ public:
 
 };
 
+class Solution_34 {
+public:
+	int findUpBound(vector<int>& nums, int target) //找上边界
+	{
+		int low = 0, high = nums.size() - 1;
+		if (nums.back()<target)
+		{
+			return -1;
+		}
+		while (low<=high)
+		{
+			int mid = (low + high) >> 1;
+			if (nums[mid]<=target)   /// 向右夹逼，找到右边界
+			{
+				low = mid + 1;
+			}
+			else
+			{
+				high = mid - 1;
+			}
+		}
+		return high; //向右夹逼，返回high
+	}
 
+	int findDownBound(vector<int>& nums, int target) // 找下边界
+	{
+		int low = 0, high = nums.size() - 1;
+		if (nums.front()>target)
+		{
+			return -1;
+		}
+		while (low<=high)
+		{
+			int mid = (low + high) >> 1;
+			if (nums[mid]<target)   /// 向左夹逼，则找到左边界
+			{
+				low = mid + 1;
+			}
+			else
+			{
+				high = mid - 1;
+			}
+		}
+
+		return low; // 向左夹逼，返回low
+	}
+
+	vector<int> searchRange(vector<int>& nums, int target) { //找到target的上下边界
+		vector<int> vec(2, -1);
+		if (nums.size() == 0 || nums.front()>target || nums.back()<target)
+		{
+			return vec;
+		}
+
+		int high = findUpBound(nums, target);
+		int low = findDownBound(nums, target);
+		
+		if ((low == high&&nums[low] == target) || (low<high))
+		{
+			vec[0] = low;
+			vec[1] = high;
+		}
+		
+		return vec;
+	}
+  
+
+	vector<int> searchRange2(int A[], int n, int target) {
+		vector<int > vec(A,A+n); //初始化
+
+		return searchRange1(vec, target);
+
+	}
+
+	vector<int> searchRange1(vector<int>& nums, int target) { //找到target的自身上下边界，非严格上下界
+		vector<int> vec(2, -1);
+		if (nums.size() == 0||nums.front()>target||nums.back()<target)
+		{
+			return vec;
+		}
+
+		//pair<int, int> temp;
+		//针对 upper_bound the objects in the range [first,last) are accessed. 本身传入的迭代器end().就是指向下一个位置
+		auto range=equal_range(nums.begin(), nums.end(), target); //返回的是两个迭代器,解引用得到值
+		
+		if (*range.first!=target||*(range.second-1)!=target)
+		{
+			return vec; 
+		}
+		vec[0]=(range.first-nums.begin()); //stl: distance()计算迭代器之间的距离
+		vec[1]=(range.second - nums.begin()-1);
+
+		return vec;
+	}
+};
 
 
 
@@ -4600,6 +4694,12 @@ public:
 #include <iomanip>  //setprecision() setw()
 int main()
 {    
+	Solution_34 su_34;
+	su_34.searchRange(vector<int>({ 5, 7, 7, 8, 8, 10 }), 8);
+	int A_34[] = {1,1};
+	su_34.searchRange2(A_34, 2, 1);
+
+
 	Solution_33 su_33;
 	int A_33[] = { 3,1 };
 	int ret_33=su_33.search(vector	<int>({3,1}), 1);
