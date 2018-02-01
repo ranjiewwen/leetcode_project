@@ -4720,15 +4720,131 @@ public:
 	}
 };
 
-// 36. Valid Sudoku
-class Solution {
+// 36. Valid Sudoku 数独/九宫格问题
+class Solution_36 {
 public:
 	bool isValidSudoku(vector<vector<char>>& board) {
 
+		int row = board.size();
+		int col = board[0].size();
+
+		unordered_map<char,int> row_mp; // <char, bool>
+		unordered_map<char,int> col_mp;
+		unordered_map<char, int>  diagonal; //对角线; sub-boxes
+
+		for (int i = 0; i < row;i++)
+		{
+			for (int j = 0; j < col;j++)
+			{
+				if (board[i][j]!='.' && row_mp.find(board[i][j])!=row_mp.end())
+				{
+					return false; //已经存在
+				}
+				else
+				{
+					row_mp[board[i][j]]++;
+				}
+				if (board[j][i] != '.'&& col_mp.find(board[j][i]) != col_mp.end())
+				{
+					return false;
+				}
+				else
+				{
+					col_mp[board[j][i]]++;
+				}
+				if (board[i / 3 * 3 + j / 3][i % 3 * 3 + j % 3] != '.'&& diagonal.find(board[i / 3 * 3 + j / 3][i % 3 * 3 + j % 3]) != diagonal.end()) // //第i个九宫格第j个格子
+				{
+					return false;
+				}
+				else
+				{
+					diagonal[board[i / 3 * 3 + j / 3][i % 3 * 3 + j % 3]]++;
+				}
+			}
+			col_mp.clear();
+			row_mp.clear();
+			diagonal.clear();
+		}
+		return true;
 	}
 };
 
-  
+// 37. Sudoku Solver
+class Solution_37 {
+public:
+	bool isValid(vector<vector<char>>& board,int i,int j) //只需要判断当前行，列，方格是否合法，节省时间
+	{
+		for (int row = 0; row < 9;row++)
+		{
+			if (row!=i&&board[i][j]==board[row][j])
+			{
+				return false;
+			}
+		}
+		for (int col = 0; col < 9;col++)
+		{
+			if (col!=j&&board[i][j]==board[i][col])
+			{
+				return false;
+			}
+		}
+		for (int row = i / 3 * 3; row < i / 3 * 3 + 3;row++)
+		{
+			for (int col = j / 3 * 3; col < j / 3 * 3 + 3;col++)
+			{
+				if (row!=i&&col!=j&&board[i][j]==board[row][col])
+				{
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+
+	bool dfs(vector<vector<char> > &board,int i,int j)
+	{
+		if (i==9)
+		{
+			return true;
+		}
+		if (j==9)
+		{
+			dfs(board, i + 1, 0);
+		}
+
+		if (board[i][j]=='.')
+		{
+			for (char k = '1'; k <='9';k++)
+			{
+				board[i][j] = k;
+				if (isValid(board,i,j))
+				{
+					if (dfs(board, i, j + 1))
+					{
+						return true;
+					}
+				}
+				board[i][j] = '.'; //达到回溯的目的
+			}
+		}
+		else
+		{
+			return dfs(board, i, j + 1);
+		}
+		return false;
+	}
+
+	void solveSudoku(vector<vector<char>>& board) {
+
+		if (board.size()<9||board[0].size()<9)
+		{
+			return;
+		}
+		dfs(board, 0, 0);
+		return;
+	}
+};
+
 
 #define cin infile
 #include <fstream>
