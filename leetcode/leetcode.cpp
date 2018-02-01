@@ -4720,6 +4720,55 @@ public:
 	}
 };
 
+// 36. Valid Sudoku 数独/九宫格问题
+class Solution_36 {
+public:
+	bool isValidSudoku(vector<vector<char>>& board) {
+
+		int row = board.size();
+		int col = board[0].size();
+
+		unordered_map<char,int> row_mp; // <char, bool>
+		unordered_map<char,int> col_mp;
+		unordered_map<char, int>  diagonal; //对角线; sub-boxes
+
+		for (int i = 0; i < row;i++)
+		{
+			for (int j = 0; j < col;j++)
+			{
+				if (board[i][j]!='.' && row_mp.find(board[i][j])!=row_mp.end())
+				{
+					return false; //已经存在
+				}
+				else
+				{
+					row_mp[board[i][j]]++;
+				}
+				if (board[j][i] != '.'&& col_mp.find(board[j][i]) != col_mp.end())
+				{
+					return false;
+				}
+				else
+				{
+					col_mp[board[j][i]]++;
+				}
+				if (board[i / 3 * 3 + j / 3][i % 3 * 3 + j % 3] != '.'&& diagonal.find(board[i / 3 * 3 + j / 3][i % 3 * 3 + j % 3]) != diagonal.end()) // //第i个九宫格第j个格子
+				{
+					return false;
+				}
+				else
+				{
+					diagonal[board[i / 3 * 3 + j / 3][i % 3 * 3 + j % 3]]++;
+				}
+			}
+			col_mp.clear();
+			row_mp.clear();
+			diagonal.clear();
+		}
+		return true;
+	}
+};
+
 
 #define cin infile
 #include <fstream>
