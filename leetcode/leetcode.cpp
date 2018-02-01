@@ -4792,7 +4792,7 @@ public:
 		{
 			for (int col = j / 3 * 3; col < j / 3 * 3 + 3;col++)
 			{
-				if (row!=i&&col!=j&&board[i][j]==board[row][col])
+				if ((row!=i||col!=j)&&board[i][j]==board[row][col]) //小方格也需要行列判断
 				{
 					return false;
 				}
@@ -4809,7 +4809,7 @@ public:
 		}
 		if (j==9)
 		{
-			dfs(board, i + 1, 0);
+			return dfs(board, i + 1, 0);
 		}
 
 		if (board[i][j]=='.')
@@ -4850,7 +4850,32 @@ public:
 #include <fstream>
 #include <iomanip>  //setprecision() setw()
 int main()
-{    
+{   
+	int a_37[][2] = { { 1, 2 }, {1,2} };
+	char A_37[][9] = { 
+		{ '.', '.', '9', '7', '4', '8', '.', '.', '.' },
+		{ '7', '.', '.', '.', '.', '.', '.', '.', '.' },
+		{ '.', '2', '.', '1', '.', '9', '.', '.', '.' },
+		{ '.', '.', '7', '.', '.', '.', '2', '4', '.' },
+		{ '.', '6', '4', '.', '1', '.', '5', '9', '.' },
+		{ '.', '9', '8', '.', '.', '.', '3', '.', '.' },
+		{ '.', '.', '.', '8', '.', '3', '.', '2', '.' },
+		{ '.', '.', '.', '.', '.', '.', '.', '.', '6' },
+		{ '.', '.', '.', '2', '7', '5', '9', '.', '.' }
+	};				
+	vector<vector<char>> vec_37;
+	for (int i = 0; i < 9;i++)
+	{
+		vector<char> tem_37;
+		for (int j = 0; j < 9;j++)
+		{
+			tem_37.push_back(A_37[i][j]);
+		}
+		vec_37.push_back(tem_37);
+	}
+	Solution_37 su_37;
+	su_37.solveSudoku(vec_37);
+
 	Solution_34 su_34;
 	su_34.searchRange(vector<int>({ 5, 7, 7, 8, 8, 10 }), 8);
 	int A_34[] = {1,1};
