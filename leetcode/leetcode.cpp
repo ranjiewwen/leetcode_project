@@ -4720,6 +4720,15 @@ public:
 	}
 };
 
+// 36. Valid Sudoku
+class Solution {
+public:
+	bool isValidSudoku(vector<vector<char>>& board) {
+
+	}
+};
+
+  
 
 #define cin infile
 #include <fstream>
