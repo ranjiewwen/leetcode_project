@@ -4845,6 +4845,44 @@ public:
 	}
 };
 
+// add 39. Combination Sum
+class Solution_39 {
+public:
+
+	void dfs(vector<vector<int>> &vecs, vector<int> &vec, int i, int target, vector<int> &candidates)
+	{
+		if (target==0)
+		{
+			vecs.push_back(vec);
+			return;
+		}
+		if (target<0)
+		{
+			return;
+		}
+		for (int k = i; k < candidates.size(); k++)
+		{
+			vec.push_back(candidates[k]);
+			dfs(vecs, vec, k, target - candidates[k], candidates);
+			vec.pop_back();
+		}
+		return;
+	}
+
+	// Ä¬ÈÏÓÐÐò
+	vector<vector<int> > combinationSum(vector<int> &candidates, int target) {
+		vector<vector<int>> vecs;
+		vector<int> vec;
+		if (candidates.size()==0)
+		{
+			return vecs;
+		}
+		sort(candidates.begin(), candidates.end());
+		dfs(vecs, vec, 0, target, candidates);
+
+		return vecs;
+ 	}
+};
 
 #define cin infile
 #include <fstream>
