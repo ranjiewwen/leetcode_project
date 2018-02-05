@@ -4884,6 +4884,49 @@ public:
  	}
 };
 
+// add 40. Combination Sum ii
+class Solution_40 {
+public:
+
+	void dfs(vector<vector<int>> &vecs, vector<int> &vec, int i, int target, vector<int> &candidates)
+	{
+		if (target == 0)
+		{
+			vecs.push_back(vec);
+			return;
+		}
+		if (target < 0)
+		{
+			return;
+		}
+		// 1 1 2 5 6 (1,1,6;1 2 5)
+		for (int k = i; k < candidates.size(); k++)
+		{
+			if (k>i && candidates[k] == candidates[k - 1]) //k>0 bug
+			{
+				continue;
+			}
+			vec.push_back(candidates[k]);
+			dfs(vecs, vec, k+1, target - candidates[k], candidates);
+			vec.pop_back();
+		}
+		return;
+	}
+
+	// Ä¬ÈÏÓÐÐò
+	vector<vector<int> > combinationSum2(vector<int> &candidates, int target) {
+		vector<vector<int>> vecs;
+		vector<int> vec;
+		if (candidates.size() == 0)
+		{
+			return vecs;
+		}
+		sort(candidates.begin(), candidates.end());
+		dfs(vecs, vec, 0, target, candidates);
+
+		return vecs;
+	}
+};
 #define cin infile
 #include <fstream>
 #include <iomanip>  //setprecision() setw()
