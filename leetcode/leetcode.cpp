@@ -4927,6 +4927,8 @@ public:
 		return vecs;
 	}
 };
+
+
 #define cin infile
 #include <fstream>
 #include <iomanip>  //setprecision() setw()
