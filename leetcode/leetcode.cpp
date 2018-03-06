@@ -4928,6 +4928,12 @@ public:
 	}
 };
 
+class Solution_38 {
+public:
+	string countAndSay(int n) {
+
+	}
+};
 
 #define cin infile
 #include <fstream>
