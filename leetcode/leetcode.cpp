@@ -4928,10 +4928,38 @@ public:
 	}
 };
 
+// add 38. Count and Say
 class Solution_38 {
 public:
 	string countAndSay(int n) {
+		if (n<=0)
+		{
+			return "";
+		}
+		string res="1";
+		for (int i = 1; i < n;i++) //依次迭代n-1次
+		{
+			string temp = "";
+			int cnt = 1;
+			for (int j = 1; j < res.length();j++)
+			{
+				if (res[j-1]==res[j])
+				{
+					cnt++;
+				}
+				else
+				{
+					temp.push_back(cnt + '0'); //相同元素的个数
+					temp.push_back(res[j-1]); //相同的元素是什么！
+					cnt = 1; //元素个数复位
+				}
+			}
+			temp.push_back(cnt + '0');
+			temp.push_back(res[res.length()-1]); //最后一个元素
+			res = temp;//重新赋值下一轮迭代值
+		}
 
+		return res;
 	}
 };
 
