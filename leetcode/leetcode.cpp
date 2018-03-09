@@ -4964,7 +4964,7 @@ public:
 };
 
 // add 41. First Missing Positive
-class Solution {
+class Solution_41 {
 public:
 	//对于每个数i调整到i-1位置，当然调整后还要接着判断。
 	//最后重头扫一遍，发现第一个a[i]!=i+1位置的就返回i+1；
@@ -5010,6 +5010,68 @@ public:
 	}
 };
 
+// add 42. Trapping Rain Water
+class Solution_42 {
+public:
+
+	// 本来自己想用总面积-黑色块的面积，但是总面积不容易求得
+	// 思路1：找到最高的柱子，分左右两边处理 
+	int trap(vector<int>& height) {
+
+		if (height.size()<=0)
+		{
+			return 0;
+		}
+		int max_index = 0;
+		int max_height = height[0];
+		for (int i = 1; i < height.size();i++)
+		{
+			if (height[i]>max_height)
+			{
+				max_height = height[i];
+				max_index = i;
+			}
+		}
+
+		int sum = 0;
+		int max_left = 0;
+		for (int i = 0; i < max_index;i++)
+		{
+			if (height[i]>max_left)
+			{
+				max_left = height[i];
+			}
+			else
+			{
+				sum += (max_left-height[i]);
+			}
+		}
+
+		int max_right = 0;
+		for (int i = height.size() - 1; i >max_index; i--)
+		{
+			if (height[i]>max_right)
+			{
+				max_right = height[i];
+			}
+			else
+			{
+				sum += (max_right-height[i]);
+			}
+		}
+		return sum;
+	}
+
+	int trap(int A[], int n) {
+		vector<int > vec(A,A+n);
+		
+		return trap(vec);
+
+	}
+};
+
+
+
 
 
 #define cin infile
@@ -5017,6 +5079,11 @@ public:
 #include <iomanip>  //setprecision() setw()
 int main()
 {   
+	Solution_42 su_42;
+	vector<int> vec_42;
+	su_42.trap(vec_42);
+
+
 	int a_37[][2] = { { 1, 2 }, {1,2} };
 	char A_37[][9] = { 
 		{ '.', '.', '9', '7', '4', '8', '.', '.', '.' },
