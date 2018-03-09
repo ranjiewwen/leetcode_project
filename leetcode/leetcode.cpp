@@ -4963,6 +4963,55 @@ public:
 	}
 };
 
+// add 41. First Missing Positive
+class Solution {
+public:
+	//对于每个数i调整到i-1位置，当然调整后还要接着判断。
+	//最后重头扫一遍，发现第一个a[i]!=i+1位置的就返回i+1；
+
+	int firstMissingPositive(vector<int>& nums) { //数组约定为1-n吗？
+		
+		for (int i = 0; i < nums.size();i++)
+		{
+			if (nums[i]>0&&nums[i]<=nums.size()&&nums[i]!=nums[nums[i]-1]) // [3,4,-1,1] //用if不能一直将元素放入正确的位置，eg：1需要交换两次才行
+			while (nums[i]>0 && nums[i] <= nums.size() && nums[i] != nums[nums[i] - 1]) 
+			{
+				swap(nums[i],nums[nums[i]-1]);
+			}
+		}
+
+		for (int i = 0; i < nums.size();i++)
+		{
+			if (nums[i]!=i+1)
+			{
+				return i+1;
+			}
+		}
+		return nums.size()+1; // 空或者本身有序，缺失最后一个
+	}
+
+	int firstMissingPositive(int A[], int n) {
+		for (int i = 0; i < n; i++)
+		{
+			while (A[i] > 0 && A[i] <= n && A[i] != A[A[i] - 1])
+			{
+				swap(A[i], A[A[i] - 1]);
+			}
+		}
+
+		for (int i = 0; i < n; i++)
+		{
+			if (A[i] != i + 1)
+			{
+				return i + 1;
+			}
+		}
+		return n + 1; // 空或者本身有序，缺失最后一个
+	}
+};
+
+
+
 #define cin infile
 #include <fstream>
 #include <iomanip>  //setprecision() setw()
