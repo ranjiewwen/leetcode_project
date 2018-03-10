@@ -3,11 +3,11 @@
 #include<math.h>
 
 #include <vector>
-#include<string>
-#include<deque>
+#include <string>
+#include <deque>
 #include <stack>
 #include <queue>
-#include<map>
+#include <map>
 #include <unordered_map>
 #include <set>
 #include <unordered_set>
@@ -5070,6 +5070,72 @@ public:
 	}
 };
 
+#include <string>
+// add 43. Multiply Strings
+class Solution_43 {
+public:
+	string multiply(string num1, string num2) {
+		int len1 = num1.size();
+		int len2 = num2.size();
+
+		vector<int> vec(len1+len2,0); // 初始化内存空间
+		//vec.reserve(len1 + len2);
+		
+		for (int i = 0; i < len1; i++)
+		{
+			int k = i;
+			for (int j = 0; j < len2;j++)
+			{
+				//vec.push_back(a*b);
+				vec[k] += (num1[len1-1-i] - '0')*(num2[len2-1-j]-'0');	////Calculate from rightmost to left
+				k++; 
+			}
+		}
+
+		string ret="";
+		for (int i = 0; i < vec.size();i++)
+		{
+			if (vec[i]>=10)
+			{
+				vec[i+1] += vec[i] / 10;
+				vec[i] = vec[i] % 10;
+			}
+			//char temp[5];
+			//_itoa(vec[i], temp, 10);
+			//ret += temp;
+
+			char temp = vec[i] + '0'; 
+			ret += temp; //反着取得
+		}
+
+		//reserve(ret.begin(),ret.end());
+		//reverse(vec.begin(), vec.end()); //string没有反转函数，vector有
+		
+		//判断第一个非0位 //size_t startpos = sum.find_first_not_of("0");
+		int flag = 0;
+		for (int i = ret.size()-1; i >=0;i--)
+		{
+			if (ret[i]!='0')
+			{
+				flag = i;
+				break;
+			}
+		}
+
+		int begin = 0, end = flag;
+		while (begin < end)
+		{
+			swap(ret[begin], ret[end]);
+			begin++;
+			end--;
+		}
+
+		return ret.substr(0,flag+1);
+	}
+};
+
+
+
 
 
 
@@ -5079,6 +5145,11 @@ public:
 #include <iomanip>  //setprecision() setw()
 int main()
 {   
+
+	Solution_43 su_43;
+	string str_43 =su_43.multiply("98", "9");
+
+
 	Solution_42 su_42;
 	vector<int> vec_42;
 	su_42.trap(vec_42);
