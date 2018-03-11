@@ -5134,9 +5134,81 @@ public:
 	}
 };
 
+// add 44. Wildcard Matching
+class Solution_44 {
+public:
+	bool isMatch(string s, string p) {
+		int i = 0, j = 0, j_recall = 0, i_recall = 0;
+		while (s[i]) {
+			if (p[j] == '?' || s[i] == p[j])
+			{
+				++i; ++j; continue;
+			}
+			if (p[j] == '*')
+			{
+				i_recall = i; j_recall = ++j; continue;
+			}
+			if (j_recall)
+			{
+				i = ++i_recall; j = j_recall; continue;
+			}
+			return
+				false;
+		}
+		while (p[j] == '*')
+			++j;
+		return !p[j];
+	}
+};
 
+// 45. Jump Game II
+class Solution_45 {
+public:
+	int jump(vector<int>& nums) {
+		int n = nums.size(), step = 0;
+		int start = 0, end = 0; //bfs每一层的开始结束位置 //每层结束更新
+		while (end<n-1) //end<n时，end=n-1就可以结束了
+		{
+			step++;
+			int maxend = end + 1;
+			for (int i = start; i <= end;i++)
+			{
+				if (i+nums[i]>n)
+				{
+					return step;
+				}
+				maxend = max(i+nums[i],maxend);
+			}
+			start = end + 1;
+			end = maxend;
+		}
+		return step;
+	}
 
+	int jump(int A[], int n) {
 
+		vector<int> vec(A,A+n);
+		return jump(vec);
+	}
+};
+
+class Solution_48 {
+public:
+	void rotate(vector<vector<int>>& matrix) {
+
+		// 总的位置坐标关系：rotate[j][n-1-i]=a[i][j]
+		int n = matrix.size();
+		reverse(matrix.begin(), matrix.end()); //a[n-1-i][j]=a[i][j] 
+		for (int i = 0; i < n;i++)
+		{
+			for (int j = i + 1; j < n;j++)
+			{
+				swap(matrix[i][j],matrix[j][i]); // a[i][j]=a[j][i]
+			}
+		}
+		return;
+	}
+};
 
 
 
