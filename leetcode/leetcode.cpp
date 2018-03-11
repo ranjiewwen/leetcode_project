@@ -5210,7 +5210,7 @@ public:
 	}
 };
 
-
+// add 49. Group Anagrams
 class Solution_49 {
 public:
 	// 回文构词法有一个特点：单词里的字母的种类和数目没有改变，只是改变了字母的排列顺序。
@@ -5261,7 +5261,93 @@ public:
 	}
 };
 
+// add 50. Pow(x, n)
+class Solution_50 {
+public:
 
+	double myPow(double x, int n) { //n正负之分
+
+		double ret = 1.0;
+		if (n == 0)
+		{
+			return (double)1;
+		}
+		else if (n > 0)
+		{
+			while (n--) //超时
+			{
+				ret *= x;
+			}
+		}
+		else
+		{
+			x = 1 / x;
+			while (n++)
+			{
+				ret *= x;
+			}
+		}
+
+		return ret;
+	}
+	double myPow2(double x, int n) { //n正负之分
+
+		double ret = 1.0;
+		if (n==0)
+		{
+			return (double)1;
+		}
+		if (n<0)
+		{
+			return 1 / x*myPow(x, n + 1); //递归太深
+		}
+		else
+		{
+			return x*myPow(x, n - 1);
+		}
+
+		return ret;
+	}
+
+	double myPow1(double x, int n) {
+		double ret = 1.0;
+		if (n == 0)
+		{
+			return (double)1;
+		}
+		if (n<0) //负数处理
+		{
+			ret = 1 / x; //防止最MIN溢出
+			x = 1 / x;
+			n = -n - 1;
+		}
+
+		if (n%2==0)
+		{
+			;
+		}
+		else
+		{
+			ret *= x; 
+			n--;
+		}
+		double temp = myPow(x, n / 2);
+		ret *= (temp*temp);
+
+		return ret;
+	}
+
+	// 链接：https://www.nowcoder.com/questionTerminal/0616061711c944d7bd318fb7eaeda8f6
+	double pow(double x, int n) {
+		if (n == 0) return 1;
+		if (n < 0) 
+			return 1 / x * pow(1 / x, -(n + 1));
+		if (n % 2 == 0) 
+			return pow(x * x, n / 2);
+		else 
+			return pow(x * x, n / 2) * x;
+	}
+};
 
 
 #define cin infile
@@ -5269,6 +5355,10 @@ public:
 #include <iomanip>  //setprecision() setw()
 int main()
 {   
+	Solution_50 su_50;
+	su_50.myPow1(2.1, 3);
+
+
 	Solution_49 su_49;
 	//su_49.anagrams(vector<string>(""));
 
