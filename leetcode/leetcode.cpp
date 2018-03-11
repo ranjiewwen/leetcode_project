@@ -5211,12 +5211,82 @@ public:
 };
 
 
+class Solution_49 {
+public:
+	// 回文构词法有一个特点：单词里的字母的种类和数目没有改变，只是改变了字母的排列顺序。
+
+	vector<vector<string> > groupAnagrams(vector<string> &strs) {
+		vector<vector<string> > vecs;
+		vector<string> vec;
+
+		int len = strs.size();
+		unordered_map<string, vector<string>> mp;
+		for (int i = 0; i < len;i++)
+		{
+			string temp = strs[i];
+			sort(temp.begin(), temp.end());
+			mp[temp].push_back(strs[i]);
+		}
+
+		for (auto &iter:mp)
+		{
+			vecs.push_back(iter.second);
+		}
+		return vecs;
+	}
+
+	vector<string> anagrams(vector<string> &strs) {
+
+		vector<string> vec;
+
+		int len = strs.size();
+		if (len<=0)
+		{
+			return vec;
+		}
+		unordered_map<string, vector<string>> mp;
+		for (int i = 0; i < len; i++)
+		{
+			string temp = strs[i];
+			sort(temp.begin(), temp.end());
+			mp[temp].push_back(strs[i]);
+		}
+
+		for (auto iter = mp.begin(); iter != mp.end();iter++)
+		{
+			if (iter->second.size()>1)
+			    vec.insert(vec.end(), iter->second.begin(), iter->second.end());
+		}
+		return vec;
+	}
+};
+
+
+
 
 #define cin infile
 #include <fstream>
 #include <iomanip>  //setprecision() setw()
 int main()
 {   
+	Solution_49 su_49;
+	//su_49.anagrams(vector<string>(""));
+
+	vector<int> vec_test;
+	for (int i = 0; i < 10;i++)
+	{
+		vec_test.push_back(i);
+	}
+
+	for (vector<int>::iterator iter = vec_test.begin(); iter != vec_test.end(); iter++)
+	{
+		cout << *iter<<" "; //迭代器类指针
+	}
+
+	for (auto v:vec_test)
+	{
+		cout << v << " "; //直接输出元素
+	}
 
 	Solution_43 su_43;
 	string str_43 =su_43.multiply("98", "9");
