@@ -5413,6 +5413,110 @@ public:
 	}
 };
 
+class Solution_52 {
+public:
+	int ret = 0;
+
+	bool isValid(vector<string> &vec, int i, int j)
+	{
+		//判断当前放置位置（i，j）是否合理
+		for (int row = 0; row < i; row++) //判断同一列列
+		{
+			if (vec[row][j] == 'Q') // vec[i][j]
+			{
+				return false;
+			}
+		}
+		//判断对角线45°
+		for (int row = i - 1, col = j - 1; row >= 0 && col >= 0; row--, col--)
+		{
+			if (vec[row][col] == 'Q')
+			{
+				return false;
+			}
+		}
+		//判断对角线135%
+		for (int row = i - 1, col = j + 1; row >= 0 && col < vec.size(); row--, col++) //写法： row >= 0, col < vec.size() 错误
+		{
+			if (vec[row][col] == 'Q')
+			{
+				return false;
+			}
+		}
+		return true;
+	}
+
+	void solveNQueensHelp( vector<string> &vec, int row, int n)
+	{
+		if (row == n)
+		{
+			ret++;
+			return;
+		}
+
+		for (int col = 0; col < n; col++)
+		{
+			if (isValid(vec, row, col))
+			{
+				vec[row][col] = 'Q';
+				solveNQueensHelp( vec, row + 1, n);
+				vec[row][col] = '.';
+			}
+		}
+		return;
+	}
+
+	
+	int totalNQueens(int n) {
+
+		vector<string> vec(n, string(n, '.'));
+
+		solveNQueensHelp(vec, 0, n);
+
+		return ret;
+	}
+
+
+	// 链接：https://www.nowcoder.com/questionTerminal/00b9b6bb397949b0a56d2bc351c4cf23
+	bool isValid(vector<int> &pos, int row, int col)
+	{
+		for (int i = 0; i < row; ++i) {
+			if (col == pos[i] || abs(row - i) == abs(col - pos[i])) { //在同一列，或者行相减=列相减
+				return false;
+			}
+		}
+		return true;
+	}
+
+	void solveNQueensDFS(vector<int> &pos, int row, int &res)
+	{
+		int n = pos.size();
+		if (row == n) {
+			res++;
+		}
+		else {
+			for (int col = 0; col < n; ++col) {
+				if (isValid(pos, row, col)) {
+					pos[row] = col;
+					solveNQueensDFS(pos, row + 1, res);
+					pos[row] = -1;
+				}
+			}
+		}
+	}
+
+	int totalNQueens(int n)
+	{
+		int res = 0;
+		vector<int> pos(n, -1);//记录每一行的Queen所在的位置（0-row）
+		solveNQueensDFS(pos, 0, res);
+		return res;
+	}
+
+
+};
+
+
 
 #define cin infile
 #include <fstream>
