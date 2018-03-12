@@ -5349,13 +5349,81 @@ public:
 	}
 };
 
+// add 51. N-Queens
+class Solution_51 {
+public:
+	bool isValid(vector<string> &vec,int i,int j)
+	{
+		//判断当前放置位置（i，j）是否合理
+		for (int row = 0; row < i;row++) //判断同一列列
+		{
+			if (vec[row][j]=='Q') // vec[i][j]
+			{
+				return false;
+			}
+		}
+		//判断对角线45°
+		for (int row = i-1, col = j-1; row >= 0 && col>=0;row--,col--)
+		{
+			if (vec[row][col] == 'Q')
+			{
+				return false;
+			}
+		}
+		//判断对角线135%
+		for (int row = i-1, col = j + 1; row >= 0 && col < vec.size();row--,col++) //写法： row >= 0, col < vec.size() 错误
+		{
+			if (vec[row][col] == 'Q')
+			{
+				return false;
+			}
+		}
+		return true;
+	}
+
+	void solveNQueensHelp(vector<vector<string>> &vecs,vector<string> &vec,int row,int n)
+	{
+		if (row==n)
+		{
+			vecs.push_back(vec);
+			return;
+		}
+
+		for (int col = 0; col < n;col++)
+		{
+			if (isValid(vec,row,col))
+			{
+				vec[row][col] = 'Q';
+				solveNQueensHelp(vecs, vec, row + 1, n);
+				vec[row][col] = '.';
+			}
+		}
+		return;
+	}
+
+	vector<vector<string>> solveNQueens(int n) {
+
+		vector<string> vec(n,string(n,'.')); 
+
+		vector<vector<string> > vecs; //所有解
+
+		solveNQueensHelp(vecs,vec,0,n);
+		
+		return vecs;
+	}
+};
+
 
 #define cin infile
 #include <fstream>
 #include <iomanip>  //setprecision() setw()
 int main()
 {   
-	Solution_50 su_50;
+	Solution_51 su_51;
+	su_51.solveNQueens(4);
+
+
+	Solution_50 su_50;       
 	su_50.myPow1(2.1, 3);
 
 
