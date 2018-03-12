@@ -5505,7 +5505,7 @@ public:
 		}
 	}
 
-	int totalNQueens(int n)
+	int totalNQueens2(int n)
 	{
 		int res = 0;
 		vector<int> pos(n, -1);//记录每一行的Queen所在的位置（0-row）
@@ -5516,6 +5516,100 @@ public:
 
 };
 
+// add 53. Maximum Subarray
+class Solution {
+public:
+	int maxSubArray(vector<int>& nums) {
+
+		int ret = INT_MIN;
+		int temp = 0;
+		for (int i = 0; i < nums.size();i++)
+		{
+			temp += nums[i];
+
+			if (temp>ret) //两个if的先后顺序
+			{
+				ret = temp;
+			}
+
+			if (temp < 0)
+			{
+				temp = 0;
+			}
+		}
+		return ret;
+	}
+
+	int maxSubArray(int A[], int n) {
+		vector<int> vec(A,A+n);
+		return maxSubArray(vec);
+	}
+};
+
+class Solution_54 {
+public:
+	void help(vector<vector<int>>& matrix,vector<int> &res, int x0, int y0, int x1, int y1)
+	{
+		if (x0==x1&&y0==y1)
+		{
+			res.push_back(matrix[x0][y0]);
+		}else if (x0==x1) //最后一行
+		{
+			for (int i = y0; i <= y1;i++)
+			{
+				res.push_back(matrix[x0][i]);
+			}
+		}else if (y1==y0)
+		{
+			for (int i = x0; i <= x1;i++)
+			{
+				res.push_back(matrix[i][y0]);
+			}
+		}
+		else
+		{
+			for (int col = y0; col <= y1;col++) 
+			{
+				res.push_back(matrix[x0][col]);
+			}
+			for (int row = x0 + 1; row <= x1;row++)
+			{
+				res.push_back(matrix[row][y1]);
+			}
+			for (int col = y1 - 1; col >= y0;col--)
+			{
+				res.push_back(matrix[x1][col]);
+			}
+			for (int row = x1 - 1; row > x0;row--)
+			{
+				res.push_back(matrix[row][y0]);
+			}
+		}
+		return;
+	}
+
+	vector<int> spiralOrder(vector<vector<int>>& matrix) {
+		vector<int> res;
+		if ( matrix.empty()) //
+		{
+			return vector<int>(); //res;
+		}
+		int row = matrix.size();
+		int col = matrix[0].size(); //后面判断错误：row <= 0 || col <= 0 ，需要计算row,col调用size()出错，需要在函数开始判断
+
+		int x0 = 0, y0 = 0, x1 = row - 1, y1 = col - 1;
+		while (x0<=x1&&y0<=y1)
+		{
+			help(matrix,res, x0, y0, x1, y1);
+			x0++;
+			y0++;
+			x1--;
+			y1--;
+		}
+
+		return res;
+	}
+};
 
 
 #define cin infile
@@ -5523,6 +5617,11 @@ public:
 #include <iomanip>  //setprecision() setw()
 int main()
 {   
+	Solution_54 su_54;
+	//vector<vector<int>> vec(3, vector<int>(3, 1));
+	su_54.spiralOrder(vector<vector<int>>(0, vector<int>(3, 1)));
+
+
 	Solution_51 su_51;
 	su_51.solveNQueens(4);
 
