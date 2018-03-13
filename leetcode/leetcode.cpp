@@ -5612,6 +5612,29 @@ public:
 };
 
 
+class Solution_55 {
+public:
+	bool canJump(vector<int>& nums) {
+
+		int maxend = 0;
+		for (int i = 0; i < nums.size()&&maxend>=i;i++)
+		{
+			maxend = max(maxend,i+nums[i]);
+		}
+
+		if (maxend<nums.size()-1)
+		{
+			return false;
+		}
+		return true;
+	}
+
+	bool canJump(int A[], int n) {
+		vector<int> vec(A, A + n);
+		return canJump(vec);
+	}
+};
+
 #define cin infile
 #include <fstream>
 #include <iomanip>  //setprecision() setw()
