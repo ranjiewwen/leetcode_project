@@ -5767,7 +5767,43 @@ public:
 	}
 };
 
+// 59. Spiral Matrix II
+class Solution_59 {
+public:
+	vector<vector<int> > generateMatrix(int n) {
 
+		vector<vector<int>> vecs(n, vector<int>(n,1));
+		
+		int x0 = 0, y0 = 0;
+		int x1 = n - 1, y1 = n - 1;
+
+		int index = 0;
+		while (x0<=x1&&y0<=y1)
+		{
+			for (int i = y0; i <= y1;i++)
+			{
+				vecs[x0][i] = ++index;
+			}
+			for (int i = x0 + 1; i <= x1;i++)
+			{
+				vecs[i][y1] = ++index;
+			}
+			for (int i = y1 - 1; i >= y0;i--)
+			{
+				vecs[x1][i] = ++index;
+			}
+			for (int i = x1 - 1; i > x0;i--)
+			{
+				vecs[i][y0] = ++index;
+			}
+
+			x0++, y0++;
+			x1--, y1--;
+		}
+		
+		return vecs;
+	}
+};
 
 
 
