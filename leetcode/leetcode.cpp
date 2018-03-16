@@ -5700,7 +5700,7 @@ public:
 		for (int i = 1; i < intervals.size();i++)
 		{
 			Interval temp = intervals[i];
-			if (node.end>temp.start)
+			if (node.end>=temp.start)
 			{
 				node.end = max(node.end,temp.end);
 			}
@@ -5716,12 +5716,68 @@ public:
 	}
 };
 
+class Solution_58 {
+public:
+
+	// 反向查找，末尾空格忽略，行中出现空格就终止循环
+
+	int lengthOfLastWord(string s) {
+		int ret = 0;
+		if (s.empty())
+		{
+			return ret;
+		}
+		int i = s.size() - 1;
+		while (i>=0&&s[i] == ' ')
+		{
+			i--;
+		}
+			
+		for (; i >= 0;i--)
+		{	
+			if (s[i]==' ')
+			{
+				break;
+			}
+			ret++;
+		}
+		return ret;
+	}
+
+	int lengthOfLastWord(const char *s) {
+
+		int ret = 0;
+		int len = strlen(s);
+
+		for (int i = len - 1; i >= 0;i--)
+		{
+			if (s[i]==' ')
+			{
+				if (ret) //忽略末尾的空格，当遇到空格且有元素时，返回
+				{
+					break;
+				}
+			}
+			else
+			{
+				ret++;
+			}
+		}
+		return ret;
+	}
+};
+
+
+
+
 
 #define cin infile
 #include <fstream>
 #include <iomanip>  //setprecision() setw()
 int main()
 {   
+
+
 	Solution_54 su_54;
 	//vector<vector<int>> vec(3, vector<int>(3, 1));
 	su_54.spiralOrder(vector<vector<int>>(0, vector<int>(3, 1)));
