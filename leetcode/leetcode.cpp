@@ -5611,7 +5611,6 @@ public:
 	}
 };
 
-
 class Solution_55 {
 public:
 	bool canJump(vector<int>& nums) {
@@ -5635,7 +5634,6 @@ public:
 	}
 };
 
-
 //Definition for an interval.
 struct Interval {
 	int start;
@@ -5644,7 +5642,7 @@ struct Interval {
 	Interval(int s, int e) : start(s), end(e) {}
 };
 
-class Solution {
+class Solution_56 {
 public:
 
 	static int compare(Interval val1,Interval val2)
@@ -5680,8 +5678,43 @@ public:
 	}
 };
 
+class Solution_57 {
+public:
+	static int compare(Interval val1, Interval val2)
+	{
+		return val1.start < val2.start;
+	}
 
+	vector<Interval> insert(vector<Interval>& intervals, Interval newInterval) {
 
+		vector<Interval> vec;
+		if (intervals.empty())
+		{
+			vec.push_back(newInterval);
+			return vec;
+		}
+		intervals.push_back(newInterval);
+		sort(intervals.begin(), intervals.end(), compare);
+
+		Interval node = intervals[0]; //
+		for (int i = 1; i < intervals.size();i++)
+		{
+			Interval temp = intervals[i];
+			if (node.end>temp.start)
+			{
+				node.end = max(node.end,temp.end);
+			}
+			else
+			{
+				vec.push_back(node);
+				node = temp;
+			}
+		}
+		vec.push_back(node);
+
+		return vec;
+	}
+};
 
 
 #define cin infile
