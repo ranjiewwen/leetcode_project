@@ -5635,6 +5635,55 @@ public:
 	}
 };
 
+
+//Definition for an interval.
+struct Interval {
+	int start;
+	int end;
+	Interval() : start(0), end(0) {}
+	Interval(int s, int e) : start(s), end(e) {}
+};
+
+class Solution {
+public:
+
+	static int compare(Interval val1,Interval val2)
+	{
+		return val1.start < val2.start;
+	}
+
+	vector<Interval> merge(vector<Interval>& intervals) {
+
+		if (intervals.size()<=1)
+		{
+			return intervals;
+		}
+		sort(intervals.begin(),intervals.end(),compare); //按第一关键字排序
+		vector<Interval> vec;
+		Interval temp=intervals[0];
+		
+		for (int i = 1; i < intervals.size(); i++)
+		{
+			Interval node = intervals[i]; //取出每一个节点
+			if (node.start<=temp.end)
+			{
+				temp.end = max(temp.end,node.end);  // [[1,4],[2,3]]
+			}
+			else
+			{
+				vec.push_back(temp);
+				temp = intervals[i];
+			}
+		}
+		vec.push_back(temp);
+		return vec;
+	}
+};
+
+
+
+
+
 #define cin infile
 #include <fstream>
 #include <iomanip>  //setprecision() setw()
