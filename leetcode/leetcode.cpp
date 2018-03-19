@@ -5851,11 +5851,68 @@ public:
 
 };
 
+class Solution_61 {
+public:
+	//input:[1, 2]  3
+	//output:[2, 1]
+	ListNode *rotateRight(ListNode *head, int k) {
+
+		if (!head||k==0||!head->next)
+		{
+			return head;
+		}
+
+		ListNode* newHead = head;
+		ListNode* fast = head;
+		ListNode* lastNode = NULL;
+		int len = 0;
+		while (fast!=nullptr)
+		{
+			if (fast->next==NULL)
+			{
+				lastNode = fast;
+			}
+			fast = fast->next;
+			len++;
+		}
+
+		fast = head;
+
+		int step = len - k%len-1; // 注意k可能会大于len，因此k%=len
+		if (k%len == 0)
+		{
+			return newHead;
+		}
+		while (step)
+		{
+			step--;
+			fast = fast->next;
+		}
+
+		newHead = fast->next;
+		fast->next = NULL;
+		lastNode->next = head;
+
+		return newHead;
+	}
+};
+
+
+
 #define cin infile
 #include <fstream>
 #include <iomanip>  //setprecision() setw()
 int main()
 {   
+
+	ListNode* head_61 = new ListNode(1);
+	head_61->next = new ListNode(2);
+	/*head_61->next->next = new ListNode(3);
+	head_61->next->next->next = new ListNode(4);
+	head_61->next->next->next->next = new ListNode(5);*/
+	Solution_61 su_61;
+	su_61.rotateRight(head_61,2);
+
 
 	Solution_60 su_60;
 	su_60.getPermutation_ref(2,1);
