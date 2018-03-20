@@ -5957,6 +5957,31 @@ public:
 
 };
 
+class Solution_63 {
+public:
+	int uniquePathsWithObstacles(vector<vector<int> > &obstacleGrid) {
+
+		/// 使用O(n)空间的方案
+		int m = obstacleGrid.size(), n = obstacleGrid[0].size();
+		if (m == 0 || n == 0)
+			return 0;
+		vector<int> res(n, 0);
+		res[0] = 1;
+		for (int i = 0; i < m; i++)
+		{
+			for (int j = 0; j<n; j++)
+			{
+				if (obstacleGrid[i][j] == 1)
+					res[j] = 0;
+				else if (j>0)
+					res[j] = res[j] + res[j - 1];
+			}
+		}
+		return res[n - 1];
+
+	}
+};
+
 
 #define cin infile
 #include <fstream>
