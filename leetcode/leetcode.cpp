@@ -5983,6 +5983,66 @@ public:
 };
 
 
+//动态规划法求最长递增子序列 LIS  
+int dp[101]; /* 设数组长度不超过100，dp[i]记录到[0,i]数组的LIS */
+int lis;    /* LIS 长度 */
+int LIS(int * arr, int size)
+{
+	for (int i = 0; i < size; ++i)
+	{
+		dp[i] = 1;
+		for (int j = 0; j < i; ++j)
+		{
+			if (arr[i] > arr[j] && dp[i] < dp[j] + 1)
+			{
+				dp[i] = dp[j] + 1;
+				if (dp[i] > lis)
+				{
+					lis = dp[i];
+				}
+			}
+		}
+	}
+	return lis;
+}
+
+// add 64. Minimum Path Sum
+class Solution_64 {
+public:
+	int minPathSum(vector<vector<int>>& grid) {
+
+		int m = grid.size();
+		int n = grid[0].size();
+
+		vector<vector<int>> dp(m, vector<int>(n, 0));
+		
+		for (int i = 0; i < m;i++)
+		{
+			for (int j = 0; j < n;j++)
+			{
+				if (i==0&&j==0)
+				{
+					dp[i][j] = grid[0][0];
+				}else if (i==0)
+				{
+					dp[i][j] = dp[i][j - 1]+grid[i][j];
+				}
+				else if (j==0)
+				{
+					dp[i][j] = dp[i-1][j] + grid[i][j];
+				}
+				else
+				{
+					dp[i][j] = min(dp[i-1][j], dp[i][j - 1]) + grid[i][j];
+				}
+				
+			}
+		}
+		return dp[m-1][n-1];
+	}
+};
+
+
 #define cin infile
 #include <fstream>
 #include <iomanip>  //setprecision() setw()
