@@ -6298,6 +6298,33 @@ public:
 	};
 };
 
+class Solution_66 {
+public:
+	// 用一个数组表示一个整数的每一位，给这个整数+1，只有当前位为9时，才会有进位
+	vector<int> plusOne(vector<int> &digits) {
+
+		for (int i = digits.size() - 1; i >= 0; i--)
+		{
+			if (digits[i] == 9)
+			{
+				digits[i] = 0;
+			}
+			else
+			{
+				digits[i]++; //当前
+				return digits;
+			}
+		}
+		digits[0] = 1;
+		digits.push_back(0); //多一位就行
+
+		return digits;
+	}
+};
+
+
+
+
 #define cin infile
 #include <fstream>
 #include <iomanip>  //setprecision() setw()
