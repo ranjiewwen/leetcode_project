@@ -6043,7 +6043,7 @@ public:
 };
 
 
-class Solution_21 {
+class Solution_21_ {
 public:
 	ListNode *mergeTwoLists(ListNode *l1, ListNode *l2) {
 		if (l1==NULL)
@@ -6086,18 +6086,229 @@ public:
 
 };
 
-
-class Solution {
+// 67. Add Binary
+class Solution_67 {
 public:
 	string addBinary(string a, string b) {
 
+		string ret;
+		int len = (a.size() < b.size()) ? a.size() : b.size();
+		bool falg = false; //进位标志
+		reverse(a.begin(), a.end());
+		reverse(b.begin(), b.end());
+
+		for (int i = 0; i < len;i++)
+		{
+			if (a[i]=='1'&&b[i]=='1')
+			{
+				if (falg)
+				{
+					ret.push_back('1');
+				}
+				else
+				{
+					ret.push_back('0');
+				}
+				falg = true;
+			}
+			else if ((a[i] == '1'&&b[i] == '0') || (a[i] == '0'&&b[i] == '1'))
+			{
+				if (falg)
+				{
+					ret.push_back('0');
+					falg = true;
+				}
+				else
+				{
+					ret.push_back('1');
+					falg = false;
+				}
+			}
+			else if (a[i] == '0'&&b[i] == '0')
+			{
+				if (falg)
+				{
+					ret.push_back('1');
+				}
+				else
+				{
+					ret.push_back('0');
+				}
+				falg = false;
+			}
+		}
+		
+		int len_max = max(a.size(),b.size());
+		int len_min = min(a.size(),b.size());
+		for (int i = len_min; i < len_max; i++)
+		{
+			if (a.size() >= b.size())
+			{
+				if (a[i] == '1'&&falg)
+				{
+
+					ret.push_back('0');
+					falg = true;
+
+				}
+				else if (a[i] == '0'&&falg)
+				{
+
+					ret.push_back('1');
+					falg = false;
+				}
+				else
+				{
+					ret.push_back(a[i]);
+				}
+			}
+			else
+			{
+				if (b[i] == '1'&&falg)
+				{
+
+					ret.push_back('0');
+					falg = true;
+
+				}
+				else if (b[i] == '0'&&falg)
+				{
+
+					ret.push_back('1');
+					falg = false;
+				}
+				else
+				{
+					ret.push_back(b[i]);
+				}
+			}
+		}
+		if (falg)
+		{
+			ret.push_back('1');
+		}
+		reverse(ret.begin(), ret.end());
+		return ret;
 	}
 };
+
+// 65. Valid Number
+class Solution_65 {
+public:
+	bool isNumber(string s) {
+		int i = 0;
+		int len = s.size();
+		while (i<len&&s[i]==' ')
+		{
+			i++;
+		}
+		if (i == len)
+		{
+			return false;
+		}
+		while (i<len&&s[i] >= '0'&&s[i] <= '9')
+		{
+			i++;
+		}
+		if (i==len)
+		{
+			return true;
+		}
+
+		if (s[i] == '.')
+		{
+			i++;
+			if (i==len)
+			{
+				return false;
+			}
+		}
+		else if (s[i] == 'e')
+		{
+			if (i==0)
+			{
+				return false;
+			}
+			else
+			{
+				i++;
+			}
+		}
+		else
+		{
+			while (i < len&&s[i] == ' ')
+			{
+				i++;
+			}
+			if (i == len)
+			{
+				return true;
+			}
+			return false;
+		}
+		
+		
+		while (i<len&&s[i] >= '0'&&s[i] <= '9')
+			i++;
+		
+		while (i < len&&s[i] == ' ')
+		{
+			i++;
+		}
+
+		if (i==len)
+		{
+			return true;	
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+    //链接：https://www.nowcoder.com/questionTerminal/608d810765a34df2a0d47645626dd2d3
+	class Solution {
+	public:
+		bool isNumber(const char *s)
+		{
+			string str(s);
+			int index = str.find_first_not_of(' ');
+			if (str[index] == '+' || str[index] == '-') //正负号
+				index++;
+			int points = 0, numbers = 0;
+			for (; str[index] >= '0' && str[index] <= '9' || str[index] == '.'; index++) // 0.1 .1
+				s[index] == '.' ? ++points : ++numbers;
+			if (points > 1 || numbers < 1)
+				return false;
+
+			if (str[index] == 'e' || str[index] == 'E')
+			{
+				index++;
+				if (str[index] == '+' || str[index] == '-') // E后面也有正负号
+					index++;
+				int afterE = 0;
+				for (; str[index] >= '0' && str[index] <= '9'; index++)
+					afterE++;
+				if (afterE < 1)
+					return false;
+			}
+			for (; str[index] == ' '; index++){}
+			return str[index] == '\0';
+		}
+	};
+};
+
 #define cin infile
 #include <fstream>
 #include <iomanip>  //setprecision() setw()
 int main()
 {   
+	Solution_65 su_65;
+	su_65.isNumber(".1");
+
+	Solution_67 su_67;
+	su_67.addBinary("100", "110010");
+
 
 	Solution_62 su_62;
 	int ret_62=su_62.uniquePaths(3, 7);
