@@ -6322,7 +6322,59 @@ public:
 	}
 };
 
+class Solution_68 {
+public:
+	vector<string> fullJustify(vector<string> &words, int L) {
 
+	}
+};
+
+class Solution_69 {
+public:
+	int mySqrt(int x) {
+
+		int ret = 0;
+		int mx = INT_MAX;
+		while (1)
+		{
+			long long temp = ret*ret;
+			long long temp1 = (long long)(ret+1)*(long long)(ret+1); //关于数据的题考虑越界和边界条件；*操作之前强制类型转换
+			if (temp1>mx)
+			{
+				return ret;
+			}
+			if (temp<= x && temp1>x) //考虑越界的问题
+			{
+				break;
+			}
+			ret++;
+		}
+		return ret;
+	}
+
+	int sqrt(int x) //牛顿逼近法
+	{
+		long r = x; 
+		while (r*r > x)
+			r = (r + x / r) / 2; 
+		return r;
+	}
+
+	int sqrt_(int x)
+	{
+		if (x<2)
+		{
+			return x;
+		}
+		int l = 1, r = x;
+		while (l<r)
+		{
+			int mid = l + (x - l) >> 2;
+
+		}
+	}
+
+};
 
 
 #define cin infile
@@ -6330,6 +6382,10 @@ public:
 #include <iomanip>  //setprecision() setw()
 int main()
 {   
+
+	Solution_69 su_69;
+	int ret_69=su_69.sqrt(2147395600);
+
 	Solution_65 su_65;
 	su_65.isNumber(".1");
 
