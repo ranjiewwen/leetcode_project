@@ -6360,20 +6360,64 @@ public:
 		return r;
 	}
 
+
+	//特比特别要注意两点：第一right要取x / 2 + 1  这个还不是最重要的，其实只是影响速度
+	//第二：要用x / middle > middle  来表示x > middle*middle  不然会溢出
+	//第三：判断相等时用x / middle >= middle && x / (middle + 1) < (middle + 1)
 	int sqrt_(int x)
 	{
 		if (x<2)
 		{
 			return x;
 		}
-		int l = 1, r = x;
-		while (l<r)
+		int l = 1, r = x/2+1;
+		int mid=0;
+		while (l<=r)
 		{
-			int mid = l + (x - l) >> 2;
-
+			//mid = l + (r - l) / 2; 
+			mid = l + ((r - l) >> 1); //位运算的优先级低于算术运算 bug: mid=l+(r-l)>>1
+			if (mid != 0)
+			{
+				if (x / (mid + 1)<mid + 1 && x / mid>=mid)
+				{
+					return mid;
+				}else if (x / mid>=mid) //不使用x>mid*mid
+				{
+					l = mid + 1;
+				}
+				else if(x / mid< mid)
+				{
+					r = mid - 1;
+				}
+			}
+			
 		}
+
+		return mid;
 	}
 
+	int sqrt_ref(int x) {
+		if (x == 0){
+			return 0;
+		}
+		if (x < 0){
+			return -1;
+		}
+		int left = 1, right = x / 2 + 1, middle;
+		while (left <= right){
+			middle = (left + right) / 2;
+			if (x / middle >= middle && x / (middle + 1)<(middle + 1)){
+				return middle;
+			}
+			else if (x / middle>middle){
+				left = middle + 1;
+			}
+			else{
+				right = middle - 1;
+			}
+		}
+		return right;
+	}
 };
 
 
@@ -6384,7 +6428,7 @@ int main()
 {   
 
 	Solution_69 su_69;
-	int ret_69=su_69.sqrt(2147395600);
+	int ret_69 = su_69.sqrt_(46340 * 46340);
 
 	Solution_65 su_65;
 	su_65.isNumber(".1");
