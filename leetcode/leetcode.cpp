@@ -6421,6 +6421,40 @@ public:
 };
 
 
+// add 70. Climbing Stairs
+class Solution_70 {
+public:
+	int climbStairs(int n) {
+
+		int ret = 0;
+		int f1 = 1, f2 = 2;
+
+		if (n == 1 || n == 2)
+		{
+			return n;
+		}
+		for (int i = 3; i <= n;i++)
+		{
+			int temp = f1 + f2;
+			f1 = f2;
+			f2 = temp;
+		}
+		return f2;
+	}
+
+
+	int climbStairs_(int n)
+	{
+		if (n==1||n==2)
+		{
+			return	n;
+		}
+		return climbStairs_(n - 1) + climbStairs_(n - 2);
+	}
+
+};
+
+
 #define cin infile
 #include <fstream>
 #include <iomanip>  //setprecision() setw()
