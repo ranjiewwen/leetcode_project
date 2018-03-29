@@ -6455,11 +6455,114 @@ public:
 };
 
 
+class Solution_71 {
+public:
+
+	// test:"/a/./b///../c/../././../d/..//../e/./f/./g/././//.//h///././/..///" output:"/e/f/g"
+	string simplifyPath(string path) {
+
+		stack<string> st;
+		for (int i = 0; i < path.size();i++)
+		{
+			while (i < path.size() && path[i] == '/') i++;  //可能多个
+
+			string str = "";
+			while (i<path.size()&&path[i]!='/')  //记录'/'之间的字符串
+			{
+				str += path[i];
+				i++;
+			}
+			if (str == ".")
+			{
+				continue;
+			}
+			if (str==".."&&!st.empty())
+			{
+				st.pop();
+			}
+			else if (str!=".."&&str!="") //必须有啊   /.. ; ///斜杆在末尾的时候str=""
+			{
+				st.push(str);
+			}
+		}
+		string ret = "";
+		if (st.empty())
+		{
+			return "/";
+		}
+		while (!st.empty())
+		{
+			ret = "/" + st.top()+ret; //加在后面，否则逆序
+			st.pop();
+		}
+
+		return ret;
+	}
+
+};
+
+
+class Backpack {
+public:
+	int maxValue(vector<int> w, vector<int> v, int n, int cap) {
+		// write code here
+
+		vector<vector<int>> dp(n + 1, vector<int>(cap + 1, 0));
+
+		for (int i = 1; i <= n;i++)
+		{
+			for (int j = 1; j <= cap ;j++)
+			{
+				if (j>=w[i-1]) //w.v下标-1
+				{
+					dp[i][j] = max(dp[i-1][j],dp[i-1][j-w[i-1]]+v[i-1]);
+				}
+				else
+				{
+					dp[i][j] = dp[i-1][j];
+				}
+			}
+		}
+		return dp[n][cap];
+	}
+
+	int maxValue_(vector<int> w, vector<int> v, int n, int cap) {
+		// write code here
+
+		vector<int> dp(cap + 1, 0);
+		vector<int> pre(cap + 1, 0); //记录上一行的dp值
+		for (int i = 0; i < n;i++)
+		{
+			for (int j = 1; j <= cap;j++)
+			{
+				if (j>=w[i])
+				{
+					dp[j] = max(pre[j],pre[j-w[i]]+v[i] );
+				}
+				else
+				{
+					dp[j] = pre[j];
+				}
+			}
+			pre = dp;
+		}
+		return dp[cap];
+	}
+};
+
+
 #define cin infile
 #include <fstream>
 #include <iomanip>  //setprecision() setw()
 int main()
 {   
+
+	Backpack b;
+	int bbbb=b.maxValue_(vector<int>({ 1, 2, 3 }),vector<int>({ 1, 2, 3 }), 3, 6);
+
+	Solution_71 su_71;
+	su_71.simplifyPath("/..");
+
 
 	Solution_69 su_69;
 	int ret_69 = su_69.sqrt_(46340 * 46340);
