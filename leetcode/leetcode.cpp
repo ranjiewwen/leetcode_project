@@ -6597,7 +6597,75 @@ public:
 	}
 };
 
+class Solution_73 {
+public:
+	void setZeroes(vector<vector<int> > &matrix) {
+		
+		int n = matrix.size();
+		int m = matrix[0].size();
+		
+		bool row = false, col = false;
+		//记录第一行，第一列是否有0
+		for (int i = 0; i < n;i++)
+		{
+			if (matrix[i][0]==0)
+			{
+				row = true;
+				break;
+			}
+		}
+		for (int j = 0; j < m;j++)
+		{
+			if (matrix[0][j]==0)
+			{
+				col = true;
+				break;
+			}
+		}
 
+		//遍历其他位置，用第一行，第一列记录是否有0
+		for (int i = 1; i < n;i++)
+		{
+			for (int j = 1; j < m;j++)
+			{
+				if (matrix[i][j]==0)
+				{
+					matrix[i][0] = 0;
+					matrix[0][j] = 0;
+				}
+			}
+		}
+
+		//根据记录清0
+		for (int i = 1; i < n;i++)
+		{
+			for (int j = 1; j < m;j++)
+			{
+				if (0==matrix[i][0]||0==matrix[0][j])
+				{
+					matrix[i][j] = 0;
+				}
+			}
+		}
+
+		// 处理第一行/列
+		if (row)
+		{
+			for (int i = 0; i < n;i++)
+			{
+				matrix[i][0] = 0;
+			}
+		}
+		if (col)
+		{
+			for (int j = 0; j < m;j++)
+			{
+				matrix[0][j] = 0;
+			}
+		}
+		return;
+	}
+};
 
 
 #define cin infile
