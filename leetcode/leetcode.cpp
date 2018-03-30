@@ -6454,7 +6454,6 @@ public:
 
 };
 
-
 class Solution_71 {
 public:
 
@@ -6500,7 +6499,6 @@ public:
 	}
 
 };
-
 
 class Backpack {
 public:
@@ -6550,12 +6548,66 @@ public:
 	}
 };
 
+// 72. Edit Distance
+class Solution_72 {
+public:
+	//把问题转换为二维矩阵：
+	//	arr[i][j]表示S1.sub(0, i)和S2.sub(0, j)的编辑距离，则
+	//	arr[i][j] = min{ 1 + arr[i][j - 1], 1 + arr[i - 1][j], 1 + arr[i - 1][j - 1](当S1[i] != S2[j]), arr[i - 1][j - 1](当S1[i] == S2[j]) }
+	//边界情况：arr[0][j] = j, arr[i][0] = i
+
+	int minDistance(string word1, string word2) {
+
+		if (word1.empty()&&word2.empty())
+		{
+			return 0;
+		}
+		int n = word1.size();
+		int m = word2.size();
+
+		vector<vector<int>> dp(n + 1, vector<int>(m+1, 0));
+
+		for (int  i = 0; i <= n; i++)
+		{
+			dp[i][0] = i;
+		}
+		for (int j = 0; j <= m;j++)
+		{
+			dp[0][j] = j;
+		}
+
+		for (int i = 1; i <= n;i++)
+		{
+			for (int j = 1; j <= m;j++)
+			{
+				//S!-->S2; 当前匹配字符T1==T2,dp[i-1][j-1];不匹配时，删除T1,1+dp[i-1][j];增加T1,那么T1与j匹配，剩下i和j-1匹配,1+dp[i][j-1];更改T1,1+dp[i-1][j-1]
+				if (word1[i-1]==word2[j-1])
+				{
+					dp[i][j] = dp[i - 1][j - 1];
+				}
+				else
+				{
+					dp[i][j] =min(1 + dp[i - 1][j - 1], min(1 + dp[i - 1][j], 1 + dp[i][j - 1]));
+				}
+				
+			}
+		}
+
+		return dp[n][m];
+	}
+};
+
+
+
 
 #define cin infile
 #include <fstream>
 #include <iomanip>  //setprecision() setw()
 int main()
 {   
+
+	Solution_72 su_72;
+	su_72.minDistance("b", "");
 
 	Backpack b;
 	int bbbb=b.maxValue_(vector<int>({ 1, 2, 3 }),vector<int>({ 1, 2, 3 }), 3, 6);
