@@ -6667,12 +6667,55 @@ public:
 	}
 };
 
+//74. Search a 2D Matrix
+class Solution_74 {
+public:
+	bool searchMatrix(vector<vector<int>>& matrix, int target) {
+
+		if (matrix.empty()||matrix[0].empty())
+		{
+			return false;
+		}
+
+		int n = matrix.size();
+		int m = matrix[0].size();
+
+		/*for (int i = n-1; i >= 0; ) //bug:导致每次循环边界条件判断有问题
+		{
+		for (int j = 0; j < m;)
+		{*/
+		int i = n - 1, j = 0;
+		while (i>=0&&j<m)
+		{
+			{
+				if (matrix[i][j]==target)
+				{
+					return true;
+				}
+				else if (matrix[i][j]<target)
+				{
+					j++;
+				}
+				else
+				{
+					--i;
+				}
+			}
+		}
+
+		return false;
+	}
+};
+
 
 #define cin infile
 #include <fstream>
 #include <iomanip>  //setprecision() setw()
 int main()
 {   
+	Solution_74 su_74;
+	su_74.searchMatrix(vector<vector<int>>(1,vector<int>(1,1)),0);
+
 
 	Solution_72 su_72;
 	su_72.minDistance("b", "");
