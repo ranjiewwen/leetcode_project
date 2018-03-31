@@ -6707,12 +6707,141 @@ public:
 	}
 };
 
+// 75. Sort Colors
+class Solution_75 {
+public:
+	void sortColors(vector<int>& nums) {
+
+		if (nums.size()<=1)
+		{
+			return;
+		}
+		int left = 0, right = nums.size() - 1; // //记录右边第一个非2的元素
+
+		for (int i = 0; i <= right;i++)
+		{
+			if (nums[i]==0)
+			{
+				swap(nums[i],nums[left]);
+				left++; //记录左边第一个非0的元素
+			}else if (nums[i]==2)
+			{
+				swap(nums[i],nums[right]); //交换的数可能是0、1，需要重新判断，i不能++
+				--i;
+				right--;
+			}
+		}
+
+		return;
+	}
+
+	void sortColors(int A[], int n) {
+
+		//vector<int> vec(A, A + n); //传值没有出去
+		//sortColors(vec);
+
+		int *nums = A;
+		if (n <= 1)
+		{
+			return;
+		}
+		int left = 0, right = n - 1; // //记录右边第一个非2的元素
+
+		for (int i = 0; i <= right; i++)
+		{
+			if (nums[i] == 0)
+			{
+				swap(nums[i], nums[left]);
+				left++; //记录左边第一个非0的元素
+			}
+			else if (nums[i] == 2)
+			{
+				swap(nums[i], nums[right]); //交换的数可能是0、1，需要重新判断，i不能++
+				--i;
+				right--;
+			}
+		}
+		return;
+	}
+};
+
+// 76. Minimum Window Substring
+class Solution_76 {
+public:
+
+	//1) begin开始指向0， end一直后移，直到begin - end区间包含T中所有字符。记录窗口长度d
+	//2) 然后begin开始后移移除元素，直到移除的字符是T中的字符则停止，此时T中有一个字符没被包含在窗口，
+	//3) 继续后移end，直到T中的所有字符被包含在窗口，重新记录最小的窗口d。
+	//4) 如此循环知道end到S中的最后一个字符。
+	//时间复杂度为O(n)
+	string minWindow_(string s, string t) {
+
+		string result;
+		if (s.empty()||s.size()<t.size())
+		{
+			return result;
+		}
+		unordered_map<char, int> mp; //存储t中的字符，便于与s匹配
+		int left = 0;
+		int cnt = 0;                 //窗口字符串进行计数
+		int minlen = s.size()+1;
+		for (int i = 0; i < t.size();i++)
+		{
+			mp[t[i]]++;
+		}
+
+		for (int right = 0; right < s.size(); right++)
+		{
+			if (mp.find(s[right])!=mp.end()) //t字符在left~right窗口
+			{
+				if (mp[s[right]]>0) //体会>0的作用：当s中有重复字符串时，第一次匹配
+				{
+					cnt++; //计数器+1
+				}
+				mp[s[right]]--; //有重复元素时候，可能减为负
+
+				while (cnt==t.size()) ////当窗口内有t的所有字符，就要开始移动左窗口
+				{
+					if (mp.find(s[left])!=mp.end())
+					{
+						if (minlen>right-left+1)
+						{
+							minlen = right - left + 1;
+							result = s.substr(left, right - left + 1);
+						}
+						mp[s[left]]++; //将其包含在mp内，继续查找
+						if (mp[s[left]]>0)
+						{
+							cnt--;
+						}
+					}
+					left++; //右移窗口左边
+				}
+			}
+		}
+
+		return result;
+	}
+
+	string minWindow(string S, string T) {
+		string S, T;
+		return minWindow_(S, T);
+	}
+};
+
 
 #define cin infile
 #include <fstream>
 #include <iomanip>  //setprecision() setw()
 int main()
 {   
+	Solution_76 su_76;
+	su_76.minWindow("bba", "ab");
+
+	Solution_75 su_75;
+	int a_75[] = { 1, 0 };
+	su_75.sortColors(a_75,2);
+
 	Solution_74 su_74;
 	su_74.searchMatrix(vector<vector<int>>(1,vector<int>(1,1)),0);
 
