@@ -6927,6 +6927,124 @@ public:
 
 };
 
+// 79. Word Search
+class Solution_79 {
+public:
+
+	typedef pair<int, int> pii;
+	int ajd[8][2] = { { -1, -1 }, { 0, -1 }, { 1, -1 }, { -1, 0 }, { 1, 0 }, { -1, 1 }, { 0, 1 }, {1,1} }; //上下左右，四连通域
+
+	bool judgeValid_bug(vector<vector<char>>& board, string word,int index, int x, int y)
+	{
+		int m = board.size();
+		int n = board[0].size();
+
+		pii p(x,y);
+		queue<pii> que;
+		que.push(p);
+
+		if (index == word.size())
+		{
+			return true;
+		}
+		while (!que.empty())
+		{
+			int size = que.size();
+			while (size--)
+			{
+				pii temp = que.front();
+				x = temp.first;
+				y = temp.second;
+				que.pop();
+
+				for (int i = 0; i < 8; i++)
+				{
+					if (ajd[i][0] + x >= 0 && (ajd[i][0] + x)<m && (ajd[i][1] + y) >= 0 && (ajd[i][1] + y)<n)
+					{
+						if (board[ajd[i][0] + x][ajd[i][1] + y] == word[index]) //未被归域下，才放入
+						{
+							temp.first = ajd[i][0] + x;
+							temp.second = ajd[i][1] + y;
+							que.push(temp);
+							if (index == word.size() - 1)
+							{
+								return true;
+							}
+						}
+					}
+				}
+
+			}
+			index++;
+		}
+		return false;
+	}
+
+	// 上下左右 dfs
+	bool judgeValid(vector<vector<char>>& board, string word, int index, int x, int y)
+	{
+		int m = board.size();
+		int n = board[0].size();
+
+		if (index >= word.size())
+		{
+			return true;
+		}
+		if (x < 0 || y < 0 || x >= m || y >= n)
+		{
+			return false; //超出边界
+		}
+
+		if (board[x][y]!=word[index])
+		{
+			return false;
+		}
+
+		char temp = board[x][y];
+		board[x][y] = '.';  //节约used[i][j] = true; 空间 //防止从同一位置开始，以后重复使用
+
+		bool ret = judgeValid(board,word,index+1,x-1,y)||
+			judgeValid(board,word,index+1,x,y-1)||
+			judgeValid(board,word,index+1,x,y+1)||
+			judgeValid(board,word,index+1,x+1,y);
+
+		board[x][y] = temp;
+
+		return ret;
+	}
+
+	bool exist(vector<vector<char>>& board, string word) {
+		
+		if (board.empty())
+		{
+			return false;
+		}
+		if (word.empty())
+		{
+			return true;
+		}
+		int m = board.size();
+		int n = board[0].size();
+
+		for (int i = 0; i < m;i++)
+		{
+			for (int j = 0; j < n;j++)
+			{
+				if (board[i][j]==word[0])
+				{
+					if (judgeValid(board,word,0,i,j))
+					{
+						return true;
+					}
+				}
+			}
+		}
+
+		return false;
+	}
+
+
+};
 
 
 #define cin infile
