@@ -6829,6 +6829,40 @@ public:
 	}
 };
 
+class Solution_77 {
+public:
+
+	void help(vector<vector<int>>& vecs, vector<int> &vec,int i,int k,int n )
+	{
+		if (k==0)
+		{
+			vecs.push_back(vec);
+			return;
+		}
+		if (i>n)
+		{
+			return;
+		}
+
+		vec.push_back(i + 1);
+		help(vecs, vec, i + 1, k-1, n);
+		vec.pop_back();
+		help(vecs, vec, i + 1, k, n);
+
+		return;
+
+	}
+
+	vector<vector<int>> combine(int n, int k) {
+
+		vector<vector<int>> vecs;
+		vector<int> vec;
+
+		help(vecs,vec,0,k,n);
+
+		return vecs;  
+	}
+};
 
 #define cin infile
 #include <fstream>
