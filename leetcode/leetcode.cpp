@@ -6829,6 +6829,7 @@ public:
 	}
 };
 
+// 77. Combinations
 class Solution_77 {
 public:
 
@@ -6863,6 +6864,70 @@ public:
 		return vecs;  
 	}
 };
+
+// 78. Subsets
+class Solution_78 {
+public:
+	void help(vector<vector<int>>& vecs, vector<int> &vec,vector<int> &src,int index,int k)
+	{
+		if (index>src.size())
+		{
+			return;
+		}
+		if (k==0)
+		{
+			vecs.push_back(vec);
+			return;
+		}
+
+		vec.push_back(src[index]);
+		help(vecs, vec, src, index + 1, k - 1);
+		vec.pop_back();
+		help(vecs, vec, src, index + 1, k);
+
+		return;
+	}
+
+	vector<vector<int>> subsets(vector<int>& nums) {
+
+		vector<vector<int>> vecs;
+		vector<int> vec;
+
+		sort(nums.begin(), nums.end());
+		for (int i = 0; i <= nums.size();i++)
+		{
+			help(vecs, vec, nums, 0, i);
+		}
+		
+		return vecs;
+	}
+
+
+    //Á´½Ó£ºhttps://www.nowcoder.com/questionTerminal/c333d551eb6243e0b4d92e37a06fbfc9
+	
+
+	void backtracking(vector<vector<int>> &result, vector<int> &path, vector<int> &S, int n) {
+		result.push_back(path);
+		for (int i = n; i < S.size(); ++i) {
+			path.push_back(S[i]);
+			backtracking(result, path, S, i + 1);
+			path.pop_back();
+		}
+	}
+	vector<vector<int> > subsets(vector<int> &S) {
+		vector<vector<int>> result;
+		vector<int> path;
+		if (S.size() == 0) 
+			return result;
+		sort(S.begin(), S.end());
+		backtracking(result, path, S, 0);
+
+		return result;
+	}
+
+};
+
+
 
 #define cin infile
 #include <fstream>
