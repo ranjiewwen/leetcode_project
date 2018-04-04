@@ -6824,7 +6824,7 @@ public:
 	}
 
 	string minWindow(string S, string T) {
-		string S, T;
+
 		return minWindow_(S, T);
 	}
 };
@@ -6914,7 +6914,7 @@ public:
 			path.pop_back();
 		}
 	}
-	vector<vector<int> > subsets(vector<int> &S) {
+	vector<vector<int> > subsets_ref(vector<int> &S) {
 		vector<vector<int>> result;
 		vector<int> path;
 		if (S.size() == 0) 
@@ -6927,12 +6927,15 @@ public:
 
 };
 
+
+// 在类内部不能直接初始化变量
+int ajd[8][2] = { { -1, -1 }, { 0, -1 }, { 1, -1 }, { -1, 0 }, { 1, 0 }, { -1, 1 }, { 0, 1 }, { 1, 1 } }; //上下左右，四连通域
+
 // 79. Word Search
 class Solution_79 {
 public:
 
 	typedef pair<int, int> pii;
-	int ajd[8][2] = { { -1, -1 }, { 0, -1 }, { 1, -1 }, { -1, 0 }, { 1, 0 }, { -1, 1 }, { 0, 1 }, {1,1} }; //上下左右，四连通域
 
 	bool judgeValid_bug(vector<vector<char>>& board, string word,int index, int x, int y)
 	{
@@ -7046,12 +7049,90 @@ public:
 
 };
 
+// 80. Remove Duplicates from Sorted Array II
+class Solution_80 {
+public:
+	int removeDuplicates_(vector<int>& nums) {
+
+		if (nums.size()<=1)
+		{
+			return nums.size();
+		}
+
+		int len = 0;
+		int start = 0, end = 0;
+
+		for (int i = 1; i < nums.size();i++)
+		{
+			if (nums[i]==nums[i-1])
+			{
+				end++;
+			}
+			else
+			{
+				start = i;
+				end = i;
+			}
+			if (end-start+1<=2)
+			{
+				nums[++len] = nums[i];
+			}
+		}
+		
+		return len+1;
+	}
+
+	int removeDuplicates(int A[], int n) {
+		
+		vector<int> vec(A, A + n); //vec传值不能达到A；
+		return removeDuplicates_(vec);
+	}
+
+	int removeDuplicates_1(int A[], int n) {
+		int *nums = A;
+		if (n <= 1)
+		{
+			return n;
+		}
+
+		int len = 0;
+		int start = 0, end = 0;
+
+		for (int i = 1; i < n; i++)
+		{
+			if (nums[i] == nums[i - 1])
+			{
+				end++;
+			}
+			else
+			{
+				start = i;
+				end = i;
+			}
+			if (end - start + 1 <= 2)
+			{
+				nums[++len] = nums[i];
+			}
+		}
+
+		return len + 1;
+	}
+
+
+};
+
 
 #define cin infile
 #include <fstream>
 #include <iomanip>  //setprecision() setw()
 int main()
 {   
+
+	Solution_80 su_80;
+	su_80.removeDuplicates_(vector<int>({1,1,1,2}));
+	int A_80[] = {1,1,1,2};
+	su_80.removeDuplicates(A_80, 4);
+
 	Solution_76 su_76;
 	su_76.minWindow("bba", "ab");
 
