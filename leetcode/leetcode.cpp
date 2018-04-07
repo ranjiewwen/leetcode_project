@@ -7121,6 +7121,62 @@ public:
 
 };
 
+// 81. Search in Rotated Sorted Array II
+class Solution_81 {
+public:
+	// The array may contain duplicates.
+	bool search_(vector<int>& nums, int target) {
+
+		if (nums.empty())
+		{
+			return false;
+		}
+		int low = 0, high = nums.size() - 1;
+		int mid = 0;
+		while (low<high)
+		{
+			mid = low + (high - low) / 2;
+			if (nums[mid]==target)
+			{
+				return true;	
+			}
+			if (nums[mid]>nums[high]) // 前半部分有序；后半部分无序
+			{
+				if (nums[mid]>target&&nums[low]<=target)
+				{
+					high = mid;
+				}
+				else
+				{
+					low = mid + 1;
+				}
+			}
+			else if (nums[mid]<nums[high]) // 后半部分有序
+			{
+				if (nums[mid]<target&&target<=nums[high])
+				{
+					low = mid+1;
+				}
+				else
+				{
+					high = mid;
+				}
+			}
+			else
+			{
+				high--;
+			}
+		}
+		return nums[low] == target ? true : false;
+	}
+
+	bool search(int A[], int n, int target) {
+		vector<int> vec(A, A + n);
+		return search_(vec, target);
+	}
+};
+
+
 
 #define cin infile
 #include <fstream>
