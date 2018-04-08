@@ -7176,6 +7176,73 @@ public:
 	}
 };
 
+// 82. Remove Duplicates from Sorted List II
+class Solution_82 {
+public:
+	ListNode* deleteDuplicates(ListNode* head) {
+
+		if (!head||!head->next)
+		{
+			return head;
+		}
+
+		ListNode*newHead = new ListNode(0);
+		newHead->next = head;
+
+		ListNode* pre = newHead;
+		ListNode* cur = head;
+		
+		while (cur&&cur->next)
+		{
+			ListNode* next = cur->next;
+		
+			if(next->val!=cur->val)
+			{
+				if (pre->next==cur) //pre->next当前元素开始，cur当前元素结束，cur->next另外不同的元素
+				{
+					pre = cur;
+				}
+				else
+				{
+					pre->next = cur->next;
+				}
+			}
+			cur = cur->next;
+		}
+		if (pre->next!=cur) //这里是地址比较，若没有重复元素，则地址相同的
+		{
+			pre->next = cur->next;
+		}
+		return newHead->next;
+	}
+};
+
+class Solution_83 {
+public:
+	ListNode *deleteDuplicates(ListNode *head) {
+
+		if (!head||!head->next)
+		{
+			return head;
+		}
+
+		ListNode* cur = head;
+		ListNode*pre = NULL;
+		while (cur&&cur->next)
+		{
+			pre = cur;
+			cur = cur->next;
+			ListNode* temp = pre; //记录每次重复点的开始位置
+		    while(cur&&pre->val==cur->val)
+			{
+				pre = cur;
+				cur=cur->next;
+			}
+			temp->next = cur; //跳过重复位置
+		}
+		return head;
+	}
+};
 
 
 #define cin infile
@@ -7183,6 +7250,12 @@ public:
 #include <iomanip>  //setprecision() setw()
 int main()
 {   
+	Solution_82 su_83;
+	ListNode*head_83 = new ListNode(1);
+	head_83->next = new ListNode(1);
+	head_83->next->next = new ListNode(3);
+	head_83->next->next->next = new ListNode(3);
+	su_83.deleteDuplicates(head_83);
 
 	Solution_80 su_80;
 	su_80.removeDuplicates_(vector<int>({1,1,1,2}));
