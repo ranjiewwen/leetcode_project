@@ -7283,8 +7283,50 @@ public:
 	}
 };
 
+// 85. Maximal Rectangle
+class Solution_85 {
+public:
 
+	int largestRectangleArea(vector<int> &height) {
+		int res = 0;
+		stack<int> s;
+		height.push_back(0);
+		for (int i = 0; i < height.size(); ++i) {
+			if (s.empty() || height[s.top()] <= height[i]) s.push(i);
+			else {
+				int tmp = s.top();
+				s.pop();
+				res = max(res, height[tmp] * (s.empty() ? i : (i - s.top() - 1)));
+				--i;
+			}
+		}
+		return res;
+	}
 
+	int maximalRectangle(vector<vector<char>>& matrix) {
+
+		if (matrix.empty())
+		{
+			return 0;
+		}
+		int res = 0;
+
+		int n = matrix.size();
+		int m = matrix[0].size();
+
+		vector<int> height(m);
+		for (int i = 0; i < n;i++)
+		{
+			for (int j = 0; j < m;j++)
+			{
+				height[j] = matrix[i][j] == '0' ? 0 : (1+height[j]);
+			}
+			res =max(res, largestRectangleArea(height));
+		}
+
+		return res;
+	}
+};
 
 #define cin infile
 #include <fstream>
