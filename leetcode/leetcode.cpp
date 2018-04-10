@@ -7244,12 +7244,57 @@ public:
 	}
 };
 
+// 84. Largest Rectangle in Histogram
+class Solution_84 {
+public:
+	int largestRectangleArea(vector<int>& heights) {
+
+		int res = 0;
+		stack<int> st; //存储递增的下标
+		for (int i = 0; i < heights.size();i++)
+		{
+			while (!st.empty() && heights[st.top()]>heights[i]) //出栈操作，之前都是递增的
+			{
+				int h = heights[st.top()];
+				st.pop();
+
+				if (st.empty())
+				{
+					res = max(res, h*i);
+				}
+				else
+				{
+					res = max(res, h*(i - st.top()-1)); //当前区间[st.top+1,i-1]
+				}
+				
+			}
+			st.push(i);
+		}
+
+		while (!st.empty()) //递增的
+		{
+			int h = heights[st.top()];
+			st.pop();
+			int s = h * (st.empty() ? heights.size() : (heights.size() - st.top() - 1));
+			res = max(res, s);
+		}
+
+		return res;
+	}
+};
+
+
+
 
 #define cin infile
 #include <fstream>
 #include <iomanip>  //setprecision() setw()
 int main()
 {   
+	Solution_84 su_84;
+	vector<int> vec_84 = { 2, 1, 5, 6, 2, 3 };
+	su_84.largestRectangleArea(vec_84);
+
 	Solution_82 su_83;
 	ListNode*head_83 = new ListNode(1);
 	head_83->next = new ListNode(1);
