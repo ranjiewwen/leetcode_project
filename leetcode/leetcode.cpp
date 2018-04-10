@@ -7328,11 +7328,64 @@ public:
 	}
 };
 
+// 86. Partition List
+class Solution_86 {
+public:
+
+	//思路：新建两个节点preHead1与preHead2，分别为指向两个链表的头结点。
+
+	//	把节点值小于x的节点链接到链表1上，节点值大等于x的节点链接到链表2上。
+	//	最后把两个链表相连即可
+	ListNode* partition(ListNode* head, int x) {
+
+		if (!head||!head->next)
+		{
+			return head;
+		}
+	
+		ListNode*cur = head;
+		ListNode*left = new ListNode(0);
+		ListNode*p = left;
+		ListNode*right = new ListNode(0);
+		ListNode*q = right;
+		while (cur)
+		{
+			ListNode* temp = cur;	
+			cur = cur->next;
+			temp->next = NULL;
+
+			if (temp->val<x)
+			{
+				left->next = temp;
+				left = left->next;
+			}
+			else
+			{
+				right->next = temp;
+				right = right->next;
+			}
+		}
+
+		left->next = q->next;
+		return p->next;
+	}
+};
+
+
+
+
 #define cin infile
 #include <fstream>
 #include <iomanip>  //setprecision() setw()
 int main()
 {   
+
+	Solution_86 su_86;
+	ListNode*head_86 = new ListNode(1);
+	head_86->next = new ListNode(4);
+	head_86->next->next = new ListNode(2);
+	su_86.partition(head_86,3);
+
 	Solution_84 su_84;
 	vector<int> vec_84 = { 2, 1, 5, 6, 2, 3 };
 	su_84.largestRectangleArea(vec_84);
