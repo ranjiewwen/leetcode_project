@@ -7371,6 +7371,45 @@ public:
 	}
 };
 
+// 87. Scramble String
+class Solution_87 {
+public:
+	bool isScramble(string s1, string s2) {
+
+		if (s1==s2)
+		{
+			return true;
+		}
+		if (s1.size()!=s2.size())
+		{
+			return false;
+		}
+
+		vector<int> hash(26,0);
+		for (int i = 0; i < s1.size();i++)
+		{
+			hash[s1[i] - 'a']++;
+			hash[s2[i] - 'a']--;
+		}
+		for (int i = 0; i < 26;i++)  //递归剪枝
+		{
+			if (hash[i]!=0)
+			{
+				return false;
+			}
+		}
+
+		bool res = false;
+		for (int i = 1; i < s1.size();i++) //遍历所有可能割开的位置, 切割的长度
+		{
+			res = res || (isScramble(s1.substr(0, i), s2.substr(0, i)) && isScramble(s1.substr(i, s1.size() - i), s2.substr(i, s1.size() - i)));   //长度要一致
+			res = res || (isScramble(s1.substr(0, i), s2.substr(s1.size() - i)) && isScramble(s1.substr(i),s2.substr(0, s1.size()-i)));
+		}
+
+		return res;
+
+	}
+};
 
 
 
