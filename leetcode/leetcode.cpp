@@ -7411,13 +7411,70 @@ public:
 	}
 };
 
+class Solution_88 {
+public:
+	// merge nums2 into nums1 as one sorted array.
+	void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) {
+
+		if (m==0)
+		{
+			for (int i = 0; i < n;i++)
+			{
+				nums1.push_back(nums2[i]);
+			}
+			return;
+		}
+		if (n==0)
+		{
+			return;
+		}
+		int len1 = m - 1;
+		int len2 = n - 1;
+		int index = m + n - 1;
+		while (len1>=0&&len2>=0)
+		{
+			if (nums2[len2]>nums1[len1])
+			{
+				nums1[index--] = nums2[len2--];
+			}
+			else
+			{
+				nums1[index--] = nums1[len1--];
+			}
+		}
+
+		while (len2>=0)
+		{
+			nums1[index--] = nums2[len2--];
+		}
+
+		return;
+	}
+
+	void merge(int A[], int m, int B[], int n) {
+		int i = m - 1;
+		int j = n - 1;
+		int index = m + n - 1;
+
+		while (i>=0&&j>=0)
+		{
+			A[index--] = (A[i] > B[j]) ? A[i--] : B[j--];
+		}
+		while (j>=0)
+		{
+			A[index--] = B[j--];
+		}
+		return;
+	}
+};
 
 
 #define cin infile
 #include <fstream>
 #include <iomanip>  //setprecision() setw()
 int main()
-{   
+{  
+
 
 	Solution_86 su_86;
 	ListNode*head_86 = new ListNode(1);
