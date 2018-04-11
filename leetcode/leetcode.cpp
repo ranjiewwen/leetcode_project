@@ -7468,13 +7468,46 @@ public:
 	}
 };
 
+// 89. Gray Code
+class Solution_89 {
+public:
+	vector<int> grayCode(int n) {
+
+	}
+};
+
+// 91. Decode Ways
+class Solution_91 {
+public:
+	// 限制条件，比如说一位数时不能为0，两位数不能大于26，其十位上的数也不能为0
+	int numDecodings(string s) {
+		if (s.empty() || (s.size() > 1 && s[0] == '0'))
+			return 0;
+		vector<int> dp(s.size()+1,0); //表示前i个字符的解码方式
+		dp[0] = 1;
+		for (int i = 1; i <= s.size();i++)
+		{
+			dp[i] = (s[i - 1] == '0') ? 0 : dp[i - 1]; //
+			if (i>1&& (s[i-2]=='1'|| (s[i-2]=='2'&&s[i-1]<='6')))
+			{
+				dp[i] += dp[i - 2];
+			}
+		}
+		return dp[s.size()];
+	}
+};
+
+
+
+
 
 #define cin infile
 #include <fstream>
 #include <iomanip>  //setprecision() setw()
 int main()
 {  
-
+	Solution_91 su_91;
+	su_91.numDecodings("0");
 
 	Solution_86 su_86;
 	ListNode*head_86 = new ListNode(1);
