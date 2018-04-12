@@ -7498,17 +7498,57 @@ public:
 		}
 		return dp[s.size()];
 	}
+
 };
 
 
+// 90. Subsets II
+class Solution_90 {
+public:
 
+	void dfs(vector<vector<int>> &res,vector<int> &out,vector<int>&nums,int pos)
+	{
+		res.push_back(out);
 
+		for (int i = pos; i < nums.size();i++)
+		{
+			out.push_back(nums[i]);
+			dfs(res, out, nums, i + 1);
+			out.pop_back();
+			while ((i+1)<nums.size()&&nums[i+1]==nums[i])
+			{
+				i++;
+			}
+		}
+		return;
+	}
+
+	vector<vector<int>> subsetsWithDup(vector<int>& nums) {
+
+		vector<vector<int>> res;
+		vector<int> out;
+		if (nums.empty())
+		{
+			return res;
+		}
+		sort(nums.begin(),nums.end());
+
+		dfs(res, out, nums, 0);
+
+		return res;
+
+	}
+};
 
 #define cin infile
 #include <fstream>
 #include <iomanip>  //setprecision() setw()
 int main()
 {  
+	Solution_90 su_90;
+	vector<int> vec_90 = {1,2,2};
+	su_90.subsetsWithDup(vec_90);
+
 	Solution_91 su_91;
 	su_91.numDecodings("0");
 
