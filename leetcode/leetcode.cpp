@@ -7540,11 +7540,56 @@ public:
 	}
 };
 
+
+class Solution_92 {
+public:
+	ListNode* reverseBetween(ListNode* head, int m, int n) {
+
+		ListNode* newHead = new ListNode(0);
+		newHead->next = head;
+
+		ListNode* pre=NULL, *cur=newHead, *front=NULL;
+
+		for (int i = 0; i < m - 1;i++)
+		{
+			cur = cur->next;
+		}
+		pre = cur;       //记录反转之前的节点
+		ListNode* last = cur->next; //也是反转后的尾指针
+
+		for (int i = m; i <= n;i++)
+		{
+			cur = pre->next;
+			pre->next = cur->next;
+			cur->next = front; //向front节点前插入,front每次前移
+			front = cur;
+		}
+
+		cur = pre->next;
+		pre->next = front;
+		last->next = cur;
+
+		return newHead->next;
+	}
+};
+
+
 #define cin infile
 #include <fstream>
 #include <iomanip>  //setprecision() setw()
 int main()
 {  
+
+	Solution_92 su_92;
+	list<int> list = {1,2,3,4,5};
+	ListNode* head_92=new ListNode(1);
+	head_92->next = new ListNode(2);
+	head_92->next->next = new ListNode(3);
+	head_92->next->next->next = new ListNode(4);
+	head_92->next->next->next->next = new ListNode(5);
+	su_92.reverseBetween(head_92, 2, 4);
+
+
 	Solution_90 su_90;
 	vector<int> vec_90 = {1,2,2};
 	su_90.subsetsWithDup(vec_90);
