@@ -7742,11 +7742,104 @@ public:
 	}
 };
 
+
+class Solution_95 {
+public:
+	vector<TreeNode *> generateTrees(int n) {
+
+		vector<TreeNode *> ves = GenerateSubTree(1, n + 1);
+
+		return ves;
+	}
+
+	vector<TreeNode*> GenerateSubTree(int l, int r) {
+		vector<TreeNode *> subTree;
+
+		if (l >= r) {
+			subTree.push_back(NULL);
+			return subTree;
+		}
+
+		if (l == r - 1) {
+			subTree.push_back(new TreeNode(l));
+			return subTree;
+		}
+
+
+		for (int i = l; i < r; ++i) {
+			vector<TreeNode *> leftSubTree = GenerateSubTree(l, i);
+			vector<TreeNode *> rightSubTree = GenerateSubTree(i + 1, r);
+
+			for (int m = 0; m < leftSubTree.size(); ++m) {
+				for (int n = 0; n < rightSubTree.size(); ++n) {
+					TreeNode *root = new TreeNode(i);
+					root->left = leftSubTree[m];
+					root->right = rightSubTree[n];
+					subTree.push_back(root);
+				}
+			}
+		}
+
+		return subTree;
+	}
+};
+
+
+class Solution_93 {
+public:
+	bool isValid(string str)
+	{
+		long temp = atol(str.c_str()); //用int溢出；atol
+		if (temp>255)
+		{
+			return false;
+		}
+		if (str[0]=='0'&&str.size()>1)
+		{
+			return false;
+		}
+		return true;
+	}
+	void dfs(vector<string> &res, string t, string s, int cnt)
+	{
+		if (cnt>3)
+		{
+			return;
+		}
+		if (cnt==3&&isValid(s)) //最后一组数
+		{
+			res.push_back(t+s);
+			return;
+		}
+		for (int i = 1; i < 4 && i < s.size();i++)
+		{
+			string sub = s.substr(0, i);
+			if (isValid(sub))
+			{
+				dfs(res, t + sub + '.', s.substr(i), cnt + 1);
+			}
+		}
+		return;
+	}
+
+	vector<string> restoreIpAddresses(string s) {
+
+		vector<string> res;
+		string t;
+		dfs(res,t,s,0);
+		return res;
+	}
+};
+
 #define cin infile
 #include <fstream>
 #include <iomanip>  //setprecision() setw()
 int main()
 {  
+
+	Solution_93 su_93;
+	su_93.restoreIpAddresses("2736786374048"); //2736786374048
+
 	Solution_96 su_96;
 	int ret_96=su_96.numTrees(19);
 
