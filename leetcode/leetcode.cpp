@@ -7573,6 +7573,128 @@ public:
 	}
 };
 
+class Solution_99 {
+public:
+	void recoverTree(TreeNode* root) {
+
+		TreeNode* first = NULL, *second = NULL, *parenet = NULL;
+		TreeNode*cur, *pre; //中序遍历
+		cur = root;
+
+		while (cur)
+		{
+			if (cur->left==NULL)
+			{
+				if (parenet&&parenet->val>cur->val)
+				{
+					if (!first)
+					{
+						first = parenet;
+					}
+					second = cur;
+				}
+				parenet = cur;
+				cur = cur->right;
+			}
+			else
+			{
+				pre = cur->left; //找到左子树的最右节点
+				while (pre->right&&pre->right!=cur)
+				{
+					pre = pre->right;
+				}
+
+				if (!pre->right)
+				{
+					pre->right = cur;
+					cur = cur->left;
+				}
+				else
+				{
+					pre->right = NULL; //恢复树结构
+					if (parenet&&parenet->val > cur->val)
+					{
+						if (!first)
+						{
+							first = parenet;
+						}
+						second = cur;
+					}
+					parenet = cur;
+					cur = cur->right;
+				}
+			}
+		}
+		if (first&&second)
+		{
+			swap(first->val, second->val);
+		}
+	}
+};
+
+class Solution_98 {
+public:
+
+	//bug
+	bool isValidBST_bug(TreeNode* root) {
+
+		if (!root||(!root->right&&!root->left))
+		{
+			return true;
+		}
+		
+		if (root->left!=NULL&&root->left->val>=root->val)
+		{
+			return false;
+		}
+		if (root->right!=NULL&&root->right->val<=root->val)
+		{
+			return false;
+		}
+		return isValidBST_bug(root->left) && isValidBST_bug(root->right);
+	}
+
+	// 二分查找树的中序遍历结果是一个递增序列
+	TreeNode* pre = NULL;
+	void InOrder(TreeNode* root,int &res)
+	{
+		if (!root)
+		{
+			return;
+		}
+		InOrder(root->left, res);
+		if (!pre)
+		{
+			pre = root;
+		}
+		else
+		{
+			if (root->val<=pre->val)
+			{
+				res = 0;
+			}
+			pre = root;
+		}
+
+		InOrder(root->right,res);
+		return;
+	}
+	bool isValidBST(TreeNode *root) {
+
+		if (!root)
+		{
+			return true;
+		}
+		int res = 1;
+		InOrder(root,res);
+
+		if (res==0)
+		{
+			return false;
+		}
+		return true;
+	}
+};
 
 #define cin infile
 #include <fstream>
