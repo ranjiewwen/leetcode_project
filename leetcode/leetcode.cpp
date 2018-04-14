@@ -7696,6 +7696,36 @@ public:
 	}
 };
 
+
+class Solution_94 {
+public:
+	vector<int> inorderTraversal(TreeNode* root) {
+
+		vector<int> res;
+		if (root==NULL)
+		{
+			return res;
+		}
+		stack<TreeNode*> st;
+		TreeNode* cur = root;
+		while (!st.empty()||cur)
+		{
+			while (cur)
+			{
+				st.push(cur);
+				cur = cur->left;
+			}
+			if (!st.empty())
+			{
+				cur = st.top();
+				res.push_back(cur->val);
+				st.pop();
+				cur = cur->right;
+			}
+		}
+		return res;
+	}
+};
 #define cin infile
 #include <fstream>
 #include <iomanip>  //setprecision() setw()
