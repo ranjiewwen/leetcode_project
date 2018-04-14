@@ -7726,11 +7726,29 @@ public:
 		return res;
 	}
 };
+
+
+// 96. Unique Binary Search Trees
+class Solution_96 {
+public:
+	int numTrees(int n) {
+		//¿¨ÌØÀ¼Êı
+		long long ans = 1;
+		for (int i = n + 1; i <= 2 * n;i++)
+		{
+			ans = ans*i / (i-n);
+		}
+		return ans / (n + 1);
+	}
+};
+
 #define cin infile
 #include <fstream>
 #include <iomanip>  //setprecision() setw()
 int main()
 {  
+	Solution_96 su_96;
+	int ret_96=su_96.numTrees(19);
 
 	Solution_92 su_92;
 	list<int> list = {1,2,3,4,5};
