@@ -7839,7 +7839,8 @@ public:
 		if (s3.length() != s1.length() + s2.length())
 			return false;
 
-		bool table[s1.length() + 1][s2.length() + 1];
+		//bool table[s1.length() + 1][s2.length() + 1];
+		vector<vector<bool>> table(s1.length() + 1, vector<bool>(s2.length() + 1, false));
 
 		for (int i = 0; i < s1.length() + 1; i++)
 		for (int j = 0; j < s2.length() + 1; j++){
@@ -7854,6 +7855,27 @@ public:
 		}
 
 		return table[s1.length()][s2.length()];
+	}
+};
+
+class Solution_236 {
+public:
+	TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+
+		if (root==NULL||root==q||root==p)
+		{
+			return root;
+		}
+
+		TreeNode* left = lowestCommonAncestor(root->left, p, q);
+		TreeNode* right = lowestCommonAncestor(root->right, p, q);
+
+		if (left!=NULL&&right!=NULL)
+		{
+			return root;
+		}
+
+		return left == NULL ? right : left;
 	}
 };
 
