@@ -7883,395 +7883,396 @@ public:
 #define cin infile
 #include <fstream>
 #include <iomanip>  //setprecision() setw()
-int main()
-{  
 
-	Solution_93 su_93;
-	su_93.restoreIpAddresses("2736786374048"); //2736786374048
-
-	Solution_96 su_96;
-	int ret_96=su_96.numTrees(19);
-
-	Solution_92 su_92;
-	list<int> list = {1,2,3,4,5};
-	ListNode* head_92=new ListNode(1);
-	head_92->next = new ListNode(2);
-	head_92->next->next = new ListNode(3);
-	head_92->next->next->next = new ListNode(4);
-	head_92->next->next->next->next = new ListNode(5);
-	su_92.reverseBetween(head_92, 2, 4);
-
-
-	Solution_90 su_90;
-	vector<int> vec_90 = {1,2,2};
-	su_90.subsetsWithDup(vec_90);
-
-	Solution_91 su_91;
-	su_91.numDecodings("0");
-
-	Solution_86 su_86;
-	ListNode*head_86 = new ListNode(1);
-	head_86->next = new ListNode(4);
-	head_86->next->next = new ListNode(2);
-	su_86.partition(head_86,3);
-
-	Solution_84 su_84;
-	vector<int> vec_84 = { 2, 1, 5, 6, 2, 3 };
-	su_84.largestRectangleArea(vec_84);
-
-	Solution_82 su_83;
-	ListNode*head_83 = new ListNode(1);
-	head_83->next = new ListNode(1);
-	head_83->next->next = new ListNode(3);
-	head_83->next->next->next = new ListNode(3);
-	su_83.deleteDuplicates(head_83);
-
-	Solution_80 su_80;
-	su_80.removeDuplicates_(vector<int>({1,1,1,2}));
-	int A_80[] = {1,1,1,2};
-	su_80.removeDuplicates(A_80, 4);
-
-	Solution_76 su_76;
-	su_76.minWindow("bba", "ab");
-
-	Solution_75 su_75;
-	int a_75[] = { 1, 0 };
-	su_75.sortColors(a_75,2);
-
-	Solution_74 su_74;
-	su_74.searchMatrix(vector<vector<int>>(1,vector<int>(1,1)),0);
-
-
-	Solution_72 su_72;
-	su_72.minDistance("b", "");
-
-	Backpack b;
-	int bbbb=b.maxValue_(vector<int>({ 1, 2, 3 }),vector<int>({ 1, 2, 3 }), 3, 6);
-
-	Solution_71 su_71;
-	su_71.simplifyPath("/..");
-
-
-	Solution_69 su_69;
-	int ret_69 = su_69.sqrt_(46340 * 46340);
-
-	Solution_65 su_65;
-	su_65.isNumber(".1");
-
-	Solution_67 su_67;
-	su_67.addBinary("100", "110010");
-
-
-	Solution_62 su_62;
-	int ret_62=su_62.uniquePaths(3, 7);
-	int ret_62_=su_62.uniquePaths2(3, 7);
-
-	ListNode* head_61 = new ListNode(1);
-	head_61->next = new ListNode(2);
-	/*head_61->next->next = new ListNode(3);
-	head_61->next->next->next = new ListNode(4);
-	head_61->next->next->next->next = new ListNode(5);*/
-	Solution_61 su_61;
-	su_61.rotateRight(head_61,2);
-
-
-	Solution_60 su_60;
-	su_60.getPermutation_ref(2,1);
-
-	Solution_54 su_54;
-	//vector<vector<int>> vec(3, vector<int>(3, 1));
-	su_54.spiralOrder(vector<vector<int>>(0, vector<int>(3, 1)));
-
-
-	Solution_51 su_51;
-	su_51.solveNQueens(4);
-
-
-	Solution_50 su_50;       
-	su_50.myPow1(2.1, 3);
-
-
-	Solution_49 su_49;
-	//su_49.anagrams(vector<string>(""));
-
-	vector<int> vec_test;
-	for (int i = 0; i < 10;i++)
-	{
-		vec_test.push_back(i);
-	}
-
-	for (vector<int>::iterator iter = vec_test.begin(); iter != vec_test.end(); iter++)
-	{
-		cout << *iter<<" "; //迭代器类指针
-	}
-
-	for (auto v:vec_test)
-	{
-		cout << v << " "; //直接输出元素
-	}
-
-	Solution_43 su_43;
-	string str_43 =su_43.multiply("98", "9");
-
-
-	Solution_42 su_42;
-	vector<int> vec_42;
-	su_42.trap(vec_42);
-
-
-	int a_37[][2] = { { 1, 2 }, {1,2} };
-	char A_37[][9] = { 
-		{ '.', '.', '9', '7', '4', '8', '.', '.', '.' },
-		{ '7', '.', '.', '.', '.', '.', '.', '.', '.' },
-		{ '.', '2', '.', '1', '.', '9', '.', '.', '.' },
-		{ '.', '.', '7', '.', '.', '.', '2', '4', '.' },
-		{ '.', '6', '4', '.', '1', '.', '5', '9', '.' },
-		{ '.', '9', '8', '.', '.', '.', '3', '.', '.' },
-		{ '.', '.', '.', '8', '.', '3', '.', '2', '.' },
-		{ '.', '.', '.', '.', '.', '.', '.', '.', '6' },
-		{ '.', '.', '.', '2', '7', '5', '9', '.', '.' }
-	};				
-	vector<vector<char>> vec_37;
-	for (int i = 0; i < 9;i++)
-	{
-		vector<char> tem_37;
-		for (int j = 0; j < 9;j++)
-		{
-			tem_37.push_back(A_37[i][j]);
-		}
-		vec_37.push_back(tem_37);
-	}
-	Solution_37 su_37;
-	su_37.solveSudoku(vec_37);
-
-	Solution_34 su_34;
-	su_34.searchRange(vector<int>({ 5, 7, 7, 8, 8, 10 }), 8);
-	int A_34[] = {1,1};
-	su_34.searchRange2(A_34, 2, 1);
-
-
-	Solution_33 su_33;
-	int A_33[] = { 3,1 };
-	int ret_33=su_33.search(vector	<int>({3,1}), 1);
-
-	Solution_32 su_32;
-	su_32.longestValidParentheses("(())()");
-
-	Solution_46 su_46;
-	su_46.permute(vector<int>({1,2,3}));
-
-	Solution_28 su_28;
-	su_28.strStr("banananobano", "nano");
-
-	ListNode* a_1 = new ListNode(1);
-	ListNode* a_2 = new ListNode(2);
-	ListNode* a_3 = new ListNode(3);
-	ListNode* a_4 = new ListNode(4);
-	ListNode* a_5 = new ListNode(5);
-	a_1->next = a_2; a_2->next = a_3; a_3->next = a_4; a_4->next = a_5;
-	Solution_25 su_25;
-	su_25.reverseKGroup(a_1,2);
-
-
-	Solution_14 su_14;
-	su_14.longestCommonPrefix(vector<string>());
-
-	Solution_13 su_13;
-	su_13.romanToInt("DCXXI");
-
-	Solution_10 su_10;
-	su_10.isMatch("aab", "c*a*b");
-
-	Solution_8 su_8;
-	su_8.myAtoi("-1");
-
-	//C++文件输入
-	ifstream infile("in.txt", ifstream::in);
-	vector<vector<int> > triangle;
-	int n_;
-	cin >> n_;
-	for (int i = 0; i < n_; i++) {
-		vector<int> vi(i + 1, 0);
-		for (int j = 0; j < i + 1; j++)
-			cin >> vi[j];
-		triangle.push_back(vi);
-	}
-	Solution_120* s_120 = new Solution_120();
-	cout << s_120->minimumTotal(triangle) << endl;
-	return 0;
-	
-	//c文件输入
-	freopen("in.txt", "r", stdin);
-    int ans = 0;
-	cin >> n_;
-	for (int i = 0; i < n_; i++){
-		for (int j = 0; j < n_; j++){
-			int x; 
-			scanf("%d", &x);
-			ans += x;
-		}
-	}
-	cout << ans << endl;
-	return 0;
-
-
-	string str_3 = "abba"; //"dvdf"  pwwkew "abba"
-	Solution_3 su_3;
-	su_3.lengthOfLongestSubstring(str_3);
-
-
-	vector<int> vec1(10, 1); //声明一个初始大小为10且值都是1的向量
-	vector<int> tmp(vec1.begin(), vec1.begin() + 3);  //用向量vec的第0个到第2个值初始化tmp
-
-	vector<vector<int>> ret;
-	int curCount = 1;
-	ret.push_back(vector<int>(0, curCount));
-
-	char str3[13];
-	scanf("%s\n", str3);
-	//how are you?
-	printf("%s\n", str3);
-
-	str3[1] = 'c'; //字符的赋值
-
-	char str1[] = "how are you?";
-	printf("%s\n", str1);
-	
-	char str2[20];
-	gets(str2); //how are you?
-	puts(str2);
-
-	char ch[] = "china\0china";
-	cout << sizeof(ch) << endl;
-	cout << strlen(ch) << endl;
-
-	//test01
-	char*a[] = { "work", "at", "alibaba" };
-	char**pa = a;
-	pa++;
-	printf("%s", *pa);
-
-	//cout << sizeof(bu) << endl;
-
-	//  可以做一个实验：string a = "aaaaaa";a[0] = '\0';a[1] = '\0';cout<<a;你会发现string确实可以存储多个\0.
-	//  但是不可以string a = "\0aaaa";这样是一个\0也不会存储的，因为a.capacity()结果为0.
-	string str_temp = "china\0\0china\0\0";
-
-	double  num = 4.5;
-	int num1 = 6;
-
-	Solution_119 su_119;
-	su_119.getRow(4);
-
-
-	int n[] = { 1, 4, 2, 3, 5, 0 };
-	vector<int>v(n, n + sizeof(n) / sizeof(int));//sizeof(n)/sizeof(int)是求数组n的长度  
-	cout << *min_element(v.begin(), v.end()) << endl;//最小元素  
-	cout << *max_element(v.begin(), v.end()) << endl;//最大元素  
-	return 0;
-
-	string begin = "a";
-	string end = "c";
-	unordered_set<string> dict;
-	dict.insert("a");
-	dict.insert("b");
-	dict.insert("c");
-	Solution_127_old su_127;
-	su_127.ladderLength(begin, end, dict);
-
-
-	vector<vector<char>> vec;
-
-	vector<char> temp(4,'X');
-	vec.push_back(temp);
-	char tem1[] = {'X','X','O','X'};
-	vector<char> temp1(tem1, tem1 + 4);
-	vec.push_back(temp1);
-	char tem2[] = { 'X', 'O', 'X', 'X' };
-	vector<char> temp2(tem2, tem2 + 4);
-	vec.push_back(temp2);
-
-	char tem3[] = { 'X', 'O', 'X', 'X' };
-	vector<char> temp3(tem3, tem3 + 4);
-	vec.push_back(temp3);
-
-	Solution_130 su_130;
-	su_130.solve(vec);
-
-
-	Solution_132 su_132;
-	string str_132 = "ab";
-	su_132.minCut(str_132);
-
-	Solution_131 su_131; 
-	string str = "aab";
-	su_131.partition(str);
-
-	//vector<int> vec;
-	//vec.push_back(2);
-    //vec.push_back(2);
-
-	//Solution_135 su_135;
-	//int ret_135=su_135.candy(vec);
-
-	RandomListNode *r_head = new RandomListNode(-1);
-
-	RandomListNode* next = new RandomListNode(-1);
-	r_head->next = next;
-
-	Solution_138 su_138;
-	RandomListNode* ret_138=su_138.copyRandomList(r_head);    
-
-
-
-	vector<int>array;
-	array.push_back(100);
-	array.push_back(300);
-	array.push_back(300);
-	array.push_back(300);
-	array.push_back(300);
-	array.push_back(500);
-	vector<int>::iterator itor;
-	for (itor = array.begin(); itor != array.end(); itor++)
-	{
-		cout << "array.size()="<<array.size() << endl;
-		if (*itor == 300)
-		{
-			itor = array.erase(itor);  //避免迭代器失效
-		}
-	}
-	for (itor = array.begin(); itor != array.end(); itor++)
-	{
-		cout << *itor << "";
-	}
-
-	// test list
-	ListNode* head = new ListNode(1);
-	ListNode* node2= new ListNode(2);
-	head->next = node2;
-
-	//ListNode* node3 = new ListNode(3);
-	//node2->next = node3;
-
-	//ListNode* node4 = new ListNode(4);
-	//node3->next = node4;
-
-	Solution_142 su142;
-	ListNode* ret142=su142.detectCycle(head);
-
-	Solution_143 su;
-	su.reorderList(head);
-
-	Solution_148 su148;
-	ListNode* ret_148 = su148.sortList(head);
-
-
-
-	
-	//test tree
-
-	return 0;
-}
+//int main()
+//{  
+//
+//	Solution_93 su_93;
+//	su_93.restoreIpAddresses("2736786374048"); //2736786374048
+//
+//	Solution_96 su_96;
+//	int ret_96=su_96.numTrees(19);
+//
+//	Solution_92 su_92;
+//	list<int> list = {1,2,3,4,5};
+//	ListNode* head_92=new ListNode(1);
+//	head_92->next = new ListNode(2);
+//	head_92->next->next = new ListNode(3);
+//	head_92->next->next->next = new ListNode(4);
+//	head_92->next->next->next->next = new ListNode(5);
+//	su_92.reverseBetween(head_92, 2, 4);
+//
+//
+//	Solution_90 su_90;
+//	vector<int> vec_90 = {1,2,2};
+//	su_90.subsetsWithDup(vec_90);
+//
+//	Solution_91 su_91;
+//	su_91.numDecodings("0");
+//
+//	Solution_86 su_86;
+//	ListNode*head_86 = new ListNode(1);
+//	head_86->next = new ListNode(4);
+//	head_86->next->next = new ListNode(2);
+//	su_86.partition(head_86,3);
+//
+//	Solution_84 su_84;
+//	vector<int> vec_84 = { 2, 1, 5, 6, 2, 3 };
+//	su_84.largestRectangleArea(vec_84);
+//
+//	Solution_82 su_83;
+//	ListNode*head_83 = new ListNode(1);
+//	head_83->next = new ListNode(1);
+//	head_83->next->next = new ListNode(3);
+//	head_83->next->next->next = new ListNode(3);
+//	su_83.deleteDuplicates(head_83);
+//
+//	Solution_80 su_80;
+//	su_80.removeDuplicates_(vector<int>({1,1,1,2}));
+//	int A_80[] = {1,1,1,2};
+//	su_80.removeDuplicates(A_80, 4);
+//
+//	Solution_76 su_76;
+//	su_76.minWindow("bba", "ab");
+//
+//	Solution_75 su_75;
+//	int a_75[] = { 1, 0 };
+//	su_75.sortColors(a_75,2);
+//
+//	Solution_74 su_74;
+//	su_74.searchMatrix(vector<vector<int>>(1,vector<int>(1,1)),0);
+//
+//
+//	Solution_72 su_72;
+//	su_72.minDistance("b", "");
+//
+//	Backpack b;
+//	int bbbb=b.maxValue_(vector<int>({ 1, 2, 3 }),vector<int>({ 1, 2, 3 }), 3, 6);
+//
+//	Solution_71 su_71;
+//	su_71.simplifyPath("/..");
+//
+//
+//	Solution_69 su_69;
+//	int ret_69 = su_69.sqrt_(46340 * 46340);
+//
+//	Solution_65 su_65;
+//	su_65.isNumber(".1");
+//
+//	Solution_67 su_67;
+//	su_67.addBinary("100", "110010");
+//
+//
+//	Solution_62 su_62;
+//	int ret_62=su_62.uniquePaths(3, 7);
+//	int ret_62_=su_62.uniquePaths2(3, 7);
+//
+//	ListNode* head_61 = new ListNode(1);
+//	head_61->next = new ListNode(2);
+//	/*head_61->next->next = new ListNode(3);
+//	head_61->next->next->next = new ListNode(4);
+//	head_61->next->next->next->next = new ListNode(5);*/
+//	Solution_61 su_61;
+//	su_61.rotateRight(head_61,2);
+//
+//
+//	Solution_60 su_60;
+//	su_60.getPermutation_ref(2,1);
+//
+//	Solution_54 su_54;
+//	//vector<vector<int>> vec(3, vector<int>(3, 1));
+//	su_54.spiralOrder(vector<vector<int>>(0, vector<int>(3, 1)));
+//
+//
+//	Solution_51 su_51;
+//	su_51.solveNQueens(4);
+//
+//
+//	Solution_50 su_50;       
+//	su_50.myPow1(2.1, 3);
+//
+//
+//	Solution_49 su_49;
+//	//su_49.anagrams(vector<string>(""));
+//
+//	vector<int> vec_test;
+//	for (int i = 0; i < 10;i++)
+//	{
+//		vec_test.push_back(i);
+//	}
+//
+//	for (vector<int>::iterator iter = vec_test.begin(); iter != vec_test.end(); iter++)
+//	{
+//		cout << *iter<<" "; //迭代器类指针
+//	}
+//
+//	for (auto v:vec_test)
+//	{
+//		cout << v << " "; //直接输出元素
+//	}
+//
+//	Solution_43 su_43;
+//	string str_43 =su_43.multiply("98", "9");
+//
+//
+//	Solution_42 su_42;
+//	vector<int> vec_42;
+//	su_42.trap(vec_42);
+//
+//
+//	int a_37[][2] = { { 1, 2 }, {1,2} };
+//	char A_37[][9] = { 
+//		{ '.', '.', '9', '7', '4', '8', '.', '.', '.' },
+//		{ '7', '.', '.', '.', '.', '.', '.', '.', '.' },
+//		{ '.', '2', '.', '1', '.', '9', '.', '.', '.' },
+//		{ '.', '.', '7', '.', '.', '.', '2', '4', '.' },
+//		{ '.', '6', '4', '.', '1', '.', '5', '9', '.' },
+//		{ '.', '9', '8', '.', '.', '.', '3', '.', '.' },
+//		{ '.', '.', '.', '8', '.', '3', '.', '2', '.' },
+//		{ '.', '.', '.', '.', '.', '.', '.', '.', '6' },
+//		{ '.', '.', '.', '2', '7', '5', '9', '.', '.' }
+//	};				
+//	vector<vector<char>> vec_37;
+//	for (int i = 0; i < 9;i++)
+//	{
+//		vector<char> tem_37;
+//		for (int j = 0; j < 9;j++)
+//		{
+//			tem_37.push_back(A_37[i][j]);
+//		}
+//		vec_37.push_back(tem_37);
+//	}
+//	Solution_37 su_37;
+//	su_37.solveSudoku(vec_37);
+//
+//	Solution_34 su_34;
+//	su_34.searchRange(vector<int>({ 5, 7, 7, 8, 8, 10 }), 8);
+//	int A_34[] = {1,1};
+//	su_34.searchRange2(A_34, 2, 1);
+//
+//
+//	Solution_33 su_33;
+//	int A_33[] = { 3,1 };
+//	int ret_33=su_33.search(vector	<int>({3,1}), 1);
+//
+//	Solution_32 su_32;
+//	su_32.longestValidParentheses("(())()");
+//
+//	Solution_46 su_46;
+//	su_46.permute(vector<int>({1,2,3}));
+//
+//	Solution_28 su_28;
+//	su_28.strStr("banananobano", "nano");
+//
+//	ListNode* a_1 = new ListNode(1);
+//	ListNode* a_2 = new ListNode(2);
+//	ListNode* a_3 = new ListNode(3);
+//	ListNode* a_4 = new ListNode(4);
+//	ListNode* a_5 = new ListNode(5);
+//	a_1->next = a_2; a_2->next = a_3; a_3->next = a_4; a_4->next = a_5;
+//	Solution_25 su_25;
+//	su_25.reverseKGroup(a_1,2);
+//
+//
+//	Solution_14 su_14;
+//	su_14.longestCommonPrefix(vector<string>());
+//
+//	Solution_13 su_13;
+//	su_13.romanToInt("DCXXI");
+//
+//	Solution_10 su_10;
+//	su_10.isMatch("aab", "c*a*b");
+//
+//	Solution_8 su_8;
+//	su_8.myAtoi("-1");
+//
+//	//C++文件输入
+//	ifstream infile("in.txt", ifstream::in);
+//	vector<vector<int> > triangle;
+//	int n_;
+//	cin >> n_;
+//	for (int i = 0; i < n_; i++) {
+//		vector<int> vi(i + 1, 0);
+//		for (int j = 0; j < i + 1; j++)
+//			cin >> vi[j];
+//		triangle.push_back(vi);
+//	}
+//	Solution_120* s_120 = new Solution_120();
+//	cout << s_120->minimumTotal(triangle) << endl;
+//	return 0;
+//	
+//	//c文件输入
+//	freopen("in.txt", "r", stdin);
+//    int ans = 0;
+//	cin >> n_;
+//	for (int i = 0; i < n_; i++){
+//		for (int j = 0; j < n_; j++){
+//			int x; 
+//			scanf("%d", &x);
+//			ans += x;
+//		}
+//	}
+//	cout << ans << endl;
+//	return 0;
+//
+//
+//	string str_3 = "abba"; //"dvdf"  pwwkew "abba"
+//	Solution_3 su_3;
+//	su_3.lengthOfLongestSubstring(str_3);
+//
+//
+//	vector<int> vec1(10, 1); //声明一个初始大小为10且值都是1的向量
+//	vector<int> tmp(vec1.begin(), vec1.begin() + 3);  //用向量vec的第0个到第2个值初始化tmp
+//
+//	vector<vector<int>> ret;
+//	int curCount = 1;
+//	ret.push_back(vector<int>(0, curCount));
+//
+//	char str3[13];
+//	scanf("%s\n", str3);
+//	//how are you?
+//	printf("%s\n", str3);
+//
+//	str3[1] = 'c'; //字符的赋值
+//
+//	char str1[] = "how are you?";
+//	printf("%s\n", str1);
+//	
+//	char str2[20];
+//	gets(str2); //how are you?
+//	puts(str2);
+//
+//	char ch[] = "china\0china";
+//	cout << sizeof(ch) << endl;
+//	cout << strlen(ch) << endl;
+//
+//	//test01
+//	char*a[] = { "work", "at", "alibaba" };
+//	char**pa = a;
+//	pa++;
+//	printf("%s", *pa);
+//
+//	//cout << sizeof(bu) << endl;
+//
+//	//  可以做一个实验：string a = "aaaaaa";a[0] = '\0';a[1] = '\0';cout<<a;你会发现string确实可以存储多个\0.
+//	//  但是不可以string a = "\0aaaa";这样是一个\0也不会存储的，因为a.capacity()结果为0.
+//	string str_temp = "china\0\0china\0\0";
+//
+//	double  num = 4.5;
+//	int num1 = 6;
+//
+//	Solution_119 su_119;
+//	su_119.getRow(4);
+//
+//
+//	int n[] = { 1, 4, 2, 3, 5, 0 };
+//	vector<int>v(n, n + sizeof(n) / sizeof(int));//sizeof(n)/sizeof(int)是求数组n的长度  
+//	cout << *min_element(v.begin(), v.end()) << endl;//最小元素  
+//	cout << *max_element(v.begin(), v.end()) << endl;//最大元素  
+//	return 0;
+//
+//	string begin = "a";
+//	string end = "c";
+//	unordered_set<string> dict;
+//	dict.insert("a");
+//	dict.insert("b");
+//	dict.insert("c");
+//	Solution_127_old su_127;
+//	su_127.ladderLength(begin, end, dict);
+//
+//
+//	vector<vector<char>> vec;
+//
+//	vector<char> temp(4,'X');
+//	vec.push_back(temp);
+//	char tem1[] = {'X','X','O','X'};
+//	vector<char> temp1(tem1, tem1 + 4);
+//	vec.push_back(temp1);
+//	char tem2[] = { 'X', 'O', 'X', 'X' };
+//	vector<char> temp2(tem2, tem2 + 4);
+//	vec.push_back(temp2);
+//
+//	char tem3[] = { 'X', 'O', 'X', 'X' };
+//	vector<char> temp3(tem3, tem3 + 4);
+//	vec.push_back(temp3);
+//
+//	Solution_130 su_130;
+//	su_130.solve(vec);
+//
+//
+//	Solution_132 su_132;
+//	string str_132 = "ab";
+//	su_132.minCut(str_132);
+//
+//	Solution_131 su_131; 
+//	string str = "aab";
+//	su_131.partition(str);
+//
+//	//vector<int> vec;
+//	//vec.push_back(2);
+//    //vec.push_back(2);
+//
+//	//Solution_135 su_135;
+//	//int ret_135=su_135.candy(vec);
+//
+//	RandomListNode *r_head = new RandomListNode(-1);
+//
+//	RandomListNode* next = new RandomListNode(-1);
+//	r_head->next = next;
+//
+//	Solution_138 su_138;
+//	RandomListNode* ret_138=su_138.copyRandomList(r_head);    
+//
+//
+//
+//	vector<int>array;
+//	array.push_back(100);
+//	array.push_back(300);
+//	array.push_back(300);
+//	array.push_back(300);
+//	array.push_back(300);
+//	array.push_back(500);
+//	vector<int>::iterator itor;
+//	for (itor = array.begin(); itor != array.end(); itor++)
+//	{
+//		cout << "array.size()="<<array.size() << endl;
+//		if (*itor == 300)
+//		{
+//			itor = array.erase(itor);  //避免迭代器失效
+//		}
+//	}
+//	for (itor = array.begin(); itor != array.end(); itor++)
+//	{
+//		cout << *itor << "";
+//	}
+//
+//	// test list
+//	ListNode* head = new ListNode(1);
+//	ListNode* node2= new ListNode(2);
+//	head->next = node2;
+//
+//	//ListNode* node3 = new ListNode(3);
+//	//node2->next = node3;
+//
+//	//ListNode* node4 = new ListNode(4);
+//	//node3->next = node4;
+//
+//	Solution_142 su142;
+//	ListNode* ret142=su142.detectCycle(head);
+//
+//	Solution_143 su;
+//	su.reorderList(head);
+//
+//	Solution_148 su148;
+//	ListNode* ret_148 = su148.sortList(head);
+//
+//
+//
+//	
+//	//test tree
+//
+//	return 0;
+//}
 
 
 
