@@ -158,10 +158,10 @@ public:
 		int start = 0, end = data.size() - 1;
 		int mid = (start + end) / 2;
 		while (start <= end){
-			if (data[mid] < k){
+			if (data[mid] < k){  
 				start = mid + 1;
 			}
-			else{
+			else{  // data[mid] >= k
 				end = mid - 1;
 			}
 			mid = (start + end) / 2;
@@ -173,7 +173,7 @@ public:
 		int start = 0, end = data.size() - 1;
 		int mid = (start + end) / 2;
 		while (start <= end){
-			if (data[mid] <= k){
+			if (data[mid] <= k){ // data[mid] == k
 				start = mid + 1;
 			}
 			else{
@@ -184,7 +184,41 @@ public:
 		return end;
 	}
 
-	//标准的二分查找
+	int getFirstK(int* data, int k, int start, int end){
+		while (start <= end){
+			int mid = start + ((end - start) >> 1);
+			if (data[mid] == k){
+				if ((mid > 0 && data[mid - 1] != k) || mid == 0)
+					return mid;
+				else
+					end = mid - 1;
+			}
+			else if (data[mid] > k)
+				end = mid - 1;
+			else
+				start = mid + 1;
+		}
+		return -1;
+	}
+
+	int getLastK(int* data, int length, int k, int start, int end){
+		while (start <= end){
+			int mid = start + ((end - start) >> 1);
+			if (data[mid] == k){
+				if ((mid < length - 1 && data[mid + 1] != k) || mid == length - 1)
+					return mid;
+				else
+					start = mid + 1;
+			}
+			else if (data[mid] < k)
+				start = mid + 1;
+			else
+				end = mid - 1;
+		}
+		return -1;
+	}
+
+	// 标准的二分查找
 	int binary_search(int*data, int n, int target)
 	{
 		int low = 0, high = n - 1;
