@@ -22,7 +22,7 @@
     <ClCompile Include="leetcode.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="剑指offer.cpp">
+    <ClCompile Include="algorithm_nowcoder.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
