@@ -79,11 +79,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <Text Include="in.txt" />
-    <Text Include="input.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="algorithm_nowcoder.cpp" />
-    <ClCompile Include="leetcode.cpp" />
+    <ClCompile Include="lintcode.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

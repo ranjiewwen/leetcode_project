@@ -115,10 +115,10 @@ public:
 };
 
 
-int main()
-{
-	ScaleSort s;
-	vector<int> vec = { 2, 1, 4, 3, 6, 5, 8, 7, 10, 9 };
-	vec = s.sortElement(vec,10,2);
-	return 0;
-}
+//int main()
+//{
+//	ScaleSort s;
+//	vector<int> vec = { 2, 1, 4, 3, 6, 5, 8, 7, 10, 9 };
+//	vec = s.sortElement(vec,10,2);
+//	return 0;
+//}

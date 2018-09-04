@@ -16,13 +16,9 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="in.txt" />
-    <Text Include="input.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="leetcode.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="algorithm_nowcoder.cpp">
+    <ClCompile Include="lintcode.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
