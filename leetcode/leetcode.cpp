@@ -7880,6 +7880,67 @@ public:
 };
 
 
+
+
+class LRUCache {
+public:
+	// 定义数据结构
+	int n;
+	list<pair<int, int>> lis; //链表头为最新访问的，链表尾为最近最少访问的
+	map<int, list<pair<int, int>>::iterator> mp; //记录每个关键字在list中的位置
+
+	LRUCache(int capacity) {
+		n = capacity;
+	}
+
+	int get(int key) {
+
+		int ret = -1;
+		if (mp.find(key) != mp.end())  //已经存在；更新cache顺序就行
+		{
+			auto iter = mp[key];
+			ret = iter->second; //记录查询key的value
+
+			lis.erase(iter);
+			lis.push_front(make_pair(key, ret));
+
+			mp[key] = lis.begin();
+
+		}
+		return ret;
+	}
+
+	void put(int key, int value) {
+
+		auto iter = mp.find(key); //iter是mp的迭代器
+
+		if (iter != mp.end()) //已经存在，更新list位置
+		{
+			lis.erase(iter->second);
+		}
+		else if (lis.size() < n)
+		{
+
+		}
+		else //list里面没有key，且list已经满了
+		{
+			//auto it = lis.end(); //end()迭代器指向最后元素的后面位置
+			//it--;
+			//m.erase(it->first);
+			//lis.erase(it);
+
+			int key = lis.back().first; //这样操作避免使用迭代器失效问题出现
+			lis.pop_back();
+			mp.erase(key);
+		}
+
+		lis.push_front(make_pair(key, value));
+		mp[key] = lis.begin();
+	}
+};
+
+
+
 #define cin infile
 #include <fstream>
 #include <iomanip>  //setprecision() setw()

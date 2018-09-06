@@ -81,6 +81,116 @@ public:
 	}
 };
 
+class Solution_57 {
+public:
+	/**
+	* @param numbers: Give an array numbers of n integer
+	* @return: Find all unique triplets in the array which gives the sum of zero.
+	*/
+
+	vector<vector<int>> threeSum(vector<int> &numbers) {
+		// write your code here
+		vector<vector<int>> ret;
+		if (numbers.size() < 3)
+			return ret;
+		sort(numbers.begin(), numbers.end());
+		vector<int> vec;
+		for (int i = 0; i < numbers.size() - 2; i++)
+		{
+			if (i >= 1 && numbers[i - 1] == numbers[i]) //去重复元素
+			{
+				continue;
+			}
+
+			int b = i + 1;
+			int c = numbers.size() - 1;
+
+			while (b<c)
+			{
+				while (b<c&&c<numbers.size() - 1 && numbers[c + 1] == numbers[c]) //去重只需要在查找到过后进行，所以放在下面else里面，容易理解一些
+					c--;
+				while (b<c&&b - 1>i&&numbers[b - 1] == numbers[b])
+					b++;
+				if (b == c)
+					continue;
+
+				int sum = numbers[i] + numbers[b] + numbers[c];
+				if (sum>0)
+				{
+					c--;
+				}
+				else if (sum < 0)
+				{
+					b++;
+				}
+				else
+				{
+					vec.clear();
+					vec.push_back(numbers[i]);
+					vec.push_back(numbers[b]);
+					vec.push_back(numbers[c]);
+					ret.push_back(vec);
+					//break; //bug
+					c--;
+					b++;
+				}
+			}
+		}
+		return ret;
+	}
+
+
+	vector<vector<int>> threeSum(vector<int> &numbers) {
+		// write your code here
+		vector<vector<int>> ret;
+		if (numbers.size() < 3)
+			return ret;
+		sort(numbers.begin(), numbers.end());
+		vector<int> vec;
+		for (int i = 0; i < numbers.size() - 2; i++)
+		{
+			if (i >= 1 && numbers[i - 1] == numbers[i]) //去重复元素
+			{
+				continue;
+			}
+
+			int b = i + 1;
+			int c = numbers.size() - 1;
+
+			while (b<c)
+			{
+
+				int sum = numbers[i] + numbers[b] + numbers[c];
+				if (sum>0)
+				{
+					c--;
+				}
+				else if (sum < 0)
+				{
+					b++;
+				}
+				else
+				{
+					vec.clear();
+					vec.push_back(numbers[i]);
+					vec.push_back(numbers[b]);
+					vec.push_back(numbers[c]);
+					ret.push_back(vec);
+					//break; //bug
+					c--;
+					b++;
+
+					while (b < c&&numbers[c + 1] == numbers[c])
+						c--;
+					while (b < c&&numbers[b - 1] == numbers[b])
+						b++;
+
+				}
+			}
+		}
+		return ret;
+	}
+};
 
 int main()
 {
