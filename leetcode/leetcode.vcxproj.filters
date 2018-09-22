@@ -18,7 +18,7 @@
     <Text Include="in.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="leetcode.cpp">
+    <ClCompile Include="lintcode.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

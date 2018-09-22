@@ -140,7 +140,7 @@ public:
 	}
 
 
-	vector<vector<int>> threeSum(vector<int> &numbers) {
+	vector<vector<int>> threeSum1(vector<int> &numbers) {
 		// write your code here
 		vector<vector<int>> ret;
 		if (numbers.size() < 3)
@@ -192,11 +192,90 @@ public:
 	}
 };
 
+class Solution_28 {
+public:
+	/**
+	* @param matrix: matrix, a list of lists of integers
+	* @param target: An integer
+	* @return: a boolean, indicate whether matrix contains target
+	*/
+	bool searchMatrix1(vector<vector<int>> &matrix, int target) {
+		// write your code 
+		if (matrix.empty())
+			return false;
+		int row = matrix.size();
+		int col = matrix[0].size();
+
+		for (int i = row - 1; i >= 0;) {
+			/* code */
+			for (int j = 0; j<col;)
+			{
+				if (matrix[i][j] == target)
+					return true;
+				else if (matrix[i][j]<target)
+					j++;
+				else
+					i--;
+			}
+		}
+		return false;
+	}
+
+	bool binary_search(vector<int>& vec, int target)
+	{
+		int low = 0;
+		int high = vec.size() - 1;
+		while (low <= high)
+		{
+			int mid = low + (high - low) / 2;
+			if (vec[mid] == target)
+				return true;
+			else if (vec[mid]>target)
+				high = mid - 1;
+			else
+				low = mid + 1;
+		}
+		return false;
+	}
+
+	bool searchMatrix(vector<vector<int>> &matrix, int target)
+	{
+		if (matrix.empty())
+			return false;
+		int low = 0;
+		int high = matrix.size() - 1; //二分找对应行
+
+		int mid = (high + low + 1) / 2;
+		while (low < high)
+		{
+			
+			if (matrix[mid][0] == target)
+				return true;
+			else if (matrix[mid][0]>target)
+				high = mid - 1;
+			else
+				low = mid;
+
+			mid = (high + low + 1) / 2;
+		}
+
+		//对应low行二分查找列
+		return binary_search(matrix[mid], target);
+
+	}
+
+};
 int main()
 {
 	Solution_59 su_59;
 	vector<int> vec_59({ 1, 2, 5, 6, 7, 3, 5, 8, -33, -5, -72, 12, -34, 100, 99, 1, 2, 5, 6, 7, 3, 5, 8, -33, -5, -72, 12, -34, 100, 0, 0, -2, 2, -5, 99, 1, 2, 5, 6, 7, 3, 5, 8, -33, -5, -72, 12, -34, 100, 99, 1, 2, 5, 6, 7, 3, 5, 8, -33, -5, -72, 12, -34, 100, 99, 1, 2, 5, 6, 7, 3, 5, 8, -33, -5, -72, 12, -34, 100, 99, 1, 2, 5, 6, 7, 3, 5, 8, -33, -5, -72, 12, -34, 100, 99, 1, 2, 5, 6, 7, 3, 5, 8, -33, -5, -72, 12, -34, 100, 99, 1, 2, 5, 6, 7, 3, 5, 8, -33, -5, -72, 12, -34, 100, 99, 1, 2, 5, 6, 7, 3, 5, 8, -33, -5, -72, 12, -34, 100, 99, 1, 2, 5, 6, 7, 3, 5, 8, -33, -5, -72, 12, -34, 100, 99, 1, 2, 5, 6, 7, 3, 5, 8, -33, -5, -72, 12, -34, 100, 99, 1, 2, 5, 6, 7, 3, 5, 8, -33, -5, -72, 12, -34, 100, 99, 1, 2, 5, 6, 7, 3, 5, 8, -33, -5, -72, 12, -34, 100, 99, 1, 2, 5, 6, 7, 3, 5, 8, -33, -5, -72, 12, -34, 100, 99, 1, 2, 5, 6, 7, 3, 5, 8, -33, -5, -72, 12, -34, 100, 99, 1, 2, 5, 6, 7, 3, 5, 8, -33, -5, -72, 12, -34, 100, 99, 1, 2, 5, 6, 7, 3, 5, 8, -33, -5, -72, 12, -34, 100, 99, 1, 2, 5, 6, 7, 3, 5, 8, -33, -5, -72, 12, -34, 100, 99, 1, 2, 5, 6, 7, 3, 5, 8, -33, -5, -72, 12, -34, 100, 99, 1, 2, 5, 6, 7, 3, 5, 8, -33, -5, -72, 12, -34, 100, 99});
 	su_59.threeSumClosest(vec_59,25);
+
+
+	Solution_28 su_28;
+	vector<vector<int>> vec_28 = { {1,4,5}, {6,7,8} };
+	su_28.searchMatrix(vec_28, 8);
+
 
 	return 0;
 }

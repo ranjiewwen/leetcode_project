@@ -81,7 +81,7 @@
     <Text Include="in.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="leetcode.cpp" />
+    <ClCompile Include="lintcode.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
